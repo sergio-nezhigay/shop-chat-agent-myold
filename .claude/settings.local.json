@@ -23,5 +23,9 @@
       "Bash(git add:*)",
       "Bash(git commit:*)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "shopify-dev-mcp"
+  ],
+  "enableAllProjectMcpServers": true
 }
