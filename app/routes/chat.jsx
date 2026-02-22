@@ -226,6 +226,12 @@ async function handleChatSession({
           // Handle tool use requests
           onToolUse: async (content) => {
             const toolName = content.name;
+
+            // Skip server-side tools handled by Anthropic (web_search)
+            if (toolName === 'web_search') {
+              return;
+            }
+
             const toolArgs = content.input;
             const toolUseId = content.id;
 
