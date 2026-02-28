@@ -267,7 +267,14 @@ export async function listConversations({ skip = 0, take = 20 } = {}) {
       orderBy: { updatedAt: "desc" },
       skip,
       take,
-      include: { _count: { select: { messages: true } } },
+      include: { 
+        _count: { select: { messages: true } },
+        messages: {
+          where: { role: 'user' },
+          orderBy: { createdAt: "desc" },
+          take: 1,
+        }
+      },
     }),
     prisma.conversation.count(),
   ]);
