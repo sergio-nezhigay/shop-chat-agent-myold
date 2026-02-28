@@ -5,6 +5,11 @@
 import { Anthropic } from "@anthropic-ai/sdk";
 import AppConfig from "./config.server";
 import systemPrompts from "../prompts/prompts.json";
+import standardAssistantContent from "../prompts/standard-assistant.txt?raw";
+
+const promptContents = {
+  "standard-assistant.txt": standardAssistantContent,
+};
 
 /**
  * Creates a Claude service instance
@@ -82,8 +87,12 @@ export function createClaudeService(apiKey = process.env.CLAUDE_API_KEY) {
    * @returns {string} The system prompt content
    */
   const getSystemPrompt = (promptType) => {
-    return systemPrompts.systemPrompts[promptType]?.content ||
-      systemPrompts.systemPrompts[AppConfig.api.defaultPromptType].content;
+    const def = systemPrompts.systemPrompts[promptType] ||
+      systemPrompts.systemPrompts[AppConfig.api.defaultPromptType];
+    if (def.file) {
+      return promptContents[def.file];
+    }
+    return def.content;
   };
 
   return {
