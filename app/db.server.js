@@ -253,3 +253,35 @@ export async function getCustomerAccountUrl(conversationId) {
     return null;
   }
 }
+
+/**
+ * List all conversations with message count, newest first, with pagination
+ * @param {Object} options - Pagination options
+ * @param {number} options.skip - Number of records to skip
+ * @param {number} options.take - Number of records to take
+ * @returns {Promise<{conversations: Array, total: number}>}
+ */
+export async function listConversations({ skip = 0, take = 20 } = {}) {
+  const [conversations, total] = await Promise.all([
+    prisma.conversation.findMany({
+      orderBy: { updatedAt: "desc" },
+      skip,
+      take,
+      include: { _count: { select: { messages: true } } },
+    }),
+    prisma.conversation.count(),
+  ]);
+  return { conversations, total };
+}
+
+/**
+ * Get a single conversation with all messages ordered by createdAt
+ * @param {string} id - The conversation ID
+ * @returns {Promise<Object|null>} - The conversation with messages or null if not found
+ */
+export async function getConversationWithMessages(id) {
+  return prisma.conversation.findUnique({
+    where: { id },
+    include: { messages: { orderBy: { createdAt: "asc" } } },
+  });
+}

@@ -1,122 +1,95 @@
+import { useLoaderData } from "react-router";
+import { authenticate } from "../shopify.server";
+import { listConversations } from "../db.server";
 import {
   Page,
   Layout,
   Text,
   Card,
   BlockStack,
-  List,
-  Link,
   InlineStack,
+  Box,
+  Button
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 
-export default function Index() {
+const PAGE_SIZE = 20;
+
+export const loader = async ({ request }) => {
+  await authenticate.admin(request);
+
+  const url = new URL(request.url);
+  const page = Math.max(1, parseInt(url.searchParams.get("page") || "1", 10));
+  const skip = (page - 1) * PAGE_SIZE;
+
+  const { conversations, total } = await listConversations({ skip, take: PAGE_SIZE });
+  const totalPages = Math.ceil(total / PAGE_SIZE);
+
+  return { conversations, total, page, totalPages };
+};
+
+function formatDate(dateString) {
+  return new Date(dateString).toLocaleString();
+}
+
+function truncateId(id) {
+  return id.length > 16 ? `${id.slice(0, 16)}…` : id;
+}
+
+export default function ConversationsList() {
+  const { conversations, total, page, totalPages } = useLoaderData();
+
   return (
     <Page>
-      <TitleBar title="Shop chat agent reference app1"></TitleBar>
-      <BlockStack gap="500">
-        <Layout>
-          <Layout.Section>
-            <Card>
-              <BlockStack gap="500">
-                <BlockStack gap="200">
-                  <Text as="h2" variant="headingMd">
-                    Congrats on creating a new Shopify app 🎉
-                  </Text>
-                  <Text variant="bodyMd" as="p">
-                    This is a reference app that adds a chat agent on your
-                    storefront, which is powered via claude and can connect
-                    shopify mcp platform.
-                  </Text>
-                </BlockStack>
+      <TitleBar title="Chat Conversations" />
+
+      <Layout>
+        <Layout.Section>
+          <BlockStack gap="400">
+            <Text as="p" variant="bodyMd">
+              {total} conversation{total !== 1 ? "s" : ""} total
+            </Text>
+
+            {conversations.length === 0 ? (
+              <Text as="p">No conversations yet.</Text>
+            ) : (
+              <BlockStack gap="400">
+                {conversations.map((conv) => (
+                  <Card key={conv.id} padding="400">
+                    <InlineStack align="space-between" blockAlign="center">
+                      <BlockStack gap="200">
+                        <Text as="h3" variant="headingMd" fontWeight="bold">
+                          {truncateId(conv.id)}
+                        </Text>
+                        <Text as="span" tone="subdued">
+                          {conv._count.messages} message{conv._count.messages !== 1 ? "s" : ""}
+                          {" · "}Updated {formatDate(conv.updatedAt)}
+                        </Text>
+                      </BlockStack>
+                      <Button url={`/app/conversations/${conv.id}`}>View →</Button>
+                    </InlineStack>
+                  </Card>
+                ))}
               </BlockStack>
-            </Card>
-          </Layout.Section>
-          <Layout.Section variant="oneThird">
-            <BlockStack gap="500">
-              <Card>
-                <BlockStack gap="200">
-                  <Text as="h2" variant="headingMd">
-                    App template specs
-                  </Text>
-                  <BlockStack gap="200">
-                    <InlineStack align="space-between">
-                      <Text as="span" variant="bodyMd">
-                        Framework
-                      </Text>
-                      <Link
-                        url="https://remix.run"
-                        target="_blank"
-                        removeUnderline
-                      >
-                        Remix
-                      </Link>
-                    </InlineStack>
-                    <InlineStack align="space-between">
-                      <Text as="span" variant="bodyMd">
-                        Database
-                      </Text>
-                      <Link
-                        url="https://www.prisma.io/"
-                        target="_blank"
-                        removeUnderline
-                      >
-                        Prisma
-                      </Link>
-                    </InlineStack>
-                    <InlineStack align="space-between">
-                      <Text as="span" variant="bodyMd">
-                        Interface
-                      </Text>
-                      <span>
-                        <Link
-                          url="https://polaris.shopify.com"
-                          target="_blank"
-                          removeUnderline
-                        >
-                          Polaris
-                        </Link>
-                        {", "}
-                        <Link
-                          url="https://shopify.dev/docs/apps/tools/app-bridge"
-                          target="_blank"
-                          removeUnderline
-                        >
-                          App Bridge
-                        </Link>
-                      </span>
-                    </InlineStack>
-                    <InlineStack align="space-between">
-                      <Text as="span" variant="bodyMd">
-                        API
-                      </Text>
-                      <Link
-                        url="https://shopify.dev/docs/api/admin-graphql"
-                        target="_blank"
-                        removeUnderline
-                      >
-                        GraphQL API
-                      </Link>
-                    </InlineStack>
-                  </BlockStack>
-                </BlockStack>
-              </Card>
-              <Card>
-                <BlockStack gap="200">
-                  <Text as="h2" variant="headingMd">
-                    Next steps
-                  </Text>
-                  <List>
-                    <List.Item>
-                      Enable the theme extension in your theme editor.
-                    </List.Item>
-                  </List>
-                </BlockStack>
-              </Card>
-            </BlockStack>
-          </Layout.Section>
-        </Layout>
-      </BlockStack>
+            )}
+
+            {totalPages > 1 && (
+              <InlineStack gap="400" align="center">
+                <Button url={`/app?page=${page - 1}`} disabled={page <= 1}>
+                  ← Previous
+                </Button>
+                <Text>
+                  Page {page} of {totalPages}
+                </Text>
+                <Button url={`/app?page=${page + 1}`} disabled={page >= totalPages}>
+                  Next →
+                </Button>
+              </InlineStack>
+            )}
+          </BlockStack>
+        </Layout.Section>
+      </Layout>
     </Page>
   );
 }
+
