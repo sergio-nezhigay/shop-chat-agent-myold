@@ -34,7 +34,8 @@
 <script>
   window.shopChatConfig = {
     promptType: {{ block.settings.system_prompt | json }},
-    welcomeMessage: {{ block.settings.welcome_message | json }}
+    welcomeMessage: {{ block.settings.welcome_message | json }},
+    serverUrl: {{ block.settings.server_url | json }}
   };
   window.shopId = {{ shop.id }};
 </script>
@@ -55,6 +56,12 @@
       "id": "welcome_message",
       "label": "Welcome Message",
       "default": "👋 Hi there! How can I help you today?"
+    },
+    {
+      "type": "text",
+      "id": "server_url",
+      "label": "Server URL",
+      "default": "https://shop-chat-agent-rinfit2.fly.dev"
     },
     {
       "type": "select",
