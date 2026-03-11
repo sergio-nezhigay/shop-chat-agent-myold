@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(tree -L 2 -I 'node_modules' /c/projects/shop-chat-agent-rinfit2 2>/dev/null || find /c/projects/shop-chat-agent-rinfit2 -maxdepth 2 -not -path '*/node_modules/*' -not -path '*/.git/*' | head -50)",
-      "Bash(fly logs:*)"
+      "Bash(fly logs:*)",
+      "WebFetch(domain:shopify.dev)",
+      "Bash(gh api:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }
