@@ -78,7 +78,6 @@ async function handleChatRequest(request) {
 
     // Generate or use existing conversation ID
     const conversationId = body.conversation_id || Date.now().toString();
-    const promptType = body.prompt_type || AppConfig.api.defaultPromptType;
 
     // Create a stream for the response
     const responseStream = createSseStream(async (stream) => {
@@ -86,7 +85,6 @@ async function handleChatRequest(request) {
         request,
         userMessage,
         conversationId,
-        promptType,
         stream
       });
     });
@@ -109,14 +107,12 @@ async function handleChatRequest(request) {
  * @param {Request} params.request - The request object
  * @param {string} params.userMessage - The user's message
  * @param {string} params.conversationId - The conversation ID
- * @param {string} params.promptType - The prompt type
  * @param {Object} params.stream - Stream manager for sending responses
  */
 async function handleChatSession({
   request,
   userMessage,
   conversationId,
-  promptType,
   stream
 }) {
   // Initialize services
@@ -183,7 +179,6 @@ async function handleChatSession({
       finalMessage = await claudeService.streamConversation(
         {
           messages: conversationHistory,
-          promptType,
           tools: mcpClient.tools
         },
         {

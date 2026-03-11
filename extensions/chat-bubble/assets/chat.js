@@ -474,11 +474,9 @@
         let currentMessageElement = null;
 
         try {
-          const promptType = window.shopChatConfig?.promptType || "standardAssistant";
           const requestBody = JSON.stringify({
             message: userMessage,
-            conversation_id: conversationId,
-            prompt_type: promptType
+            conversation_id: conversationId
           });
 
           const serverUrl = window.shopChatConfig?.serverUrl || 'https://shop-chat-agent-rinfit2.fly.dev';

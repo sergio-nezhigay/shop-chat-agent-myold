@@ -33,7 +33,6 @@
 <script src="{{ 'chat.js' | asset_url }}" defer></script>
 <script>
   window.shopChatConfig = {
-    promptType: {{ block.settings.system_prompt | json }},
     welcomeMessage: {{ block.settings.welcome_message | json }},
     serverUrl: {{ block.settings.server_url | json }}
   };
@@ -62,22 +61,6 @@
       "id": "server_url",
       "label": "Server URL",
       "default": "https://shop-chat-agent-rinfit2.fly.dev"
-    },
-    {
-      "type": "select",
-      "id": "system_prompt",
-      "label": "System Prompt",
-      "options": [
-        {
-          "value": "standardAssistant",
-          "label": "Standard Assistant"
-        },
-        {
-          "value": "enthusiasticAssistant",
-          "label": "Enthusiastic Assistant"
-        }
-      ],
-      "default": "standardAssistant"
     }
   ]
 }
