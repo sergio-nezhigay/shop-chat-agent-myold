@@ -115,13 +115,20 @@
        * Setup mobile-specific viewport adjustments
        */
       setupMobileViewport: function () {
+        let isTicking = false;
         const setViewportHeight = () => {
           document.documentElement.style.setProperty(
             "--viewport-height",
             `${window.innerHeight}px`,
           );
+          isTicking = false;
         };
-        window.addEventListener("resize", setViewportHeight);
+        window.addEventListener("resize", () => {
+          if (!isTicking) {
+            window.requestAnimationFrame(setViewportHeight);
+            isTicking = true;
+          }
+        });
         setViewportHeight();
       },
 
@@ -169,9 +176,13 @@
        */
       scrollToBottom: function () {
         const { messagesContainer } = this.elements;
-        setTimeout(() => {
-          messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }, 100);
+        // Use requestAnimationFrame and prevent layout thrashing
+        // by setting scrollTop to a large value instead of reading scrollHeight
+        window.requestAnimationFrame(() => {
+          if (messagesContainer) {
+            messagesContainer.scrollTop = 9999999;
+          }
+        });
       },
 
       /**
