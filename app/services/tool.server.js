@@ -216,10 +216,26 @@ export function createToolService() {
   const PRICE_SUMMARY_LABEL = 'ФОРМАТОВАНІ ЦІНИ';
 
   /**
+   * Builds "[Title](url)" for a product's summary line, or null when the
+   * title/url would break the storefront's link parsing or cause link
+   * mislabeling (see Formatting.formatMessageContent / convertMarkdownToHtml
+   * in chat.js, which do line-based Markdown parsing with no HTML-escaping).
+   * @param {Object} p - A formatProductData() object
+   * @returns {string|null}
+   */
+  const buildProductLinkSnippet = (p) => {
+    if (!p.url) return null;
+    if (p.title.includes(']') || p.title.includes('\n')) return null;
+    if (/\/cart|checkout/.test(p.url)) return null;
+    return `[${p.title}](${p.url})`;
+  };
+
+  /**
    * Builds an extra tool_result content block containing correctly-converted,
-   * pre-formatted prices for every product in a search_catalog response.
-   * Appended (not replacing) the raw tool content, so Claude is steered to
-   * copy prices from here verbatim instead of computing them from raw JSON.
+   * pre-formatted prices (and, where safe, a ready-made Markdown link) for
+   * every product in a search_catalog response. Appended (not replacing) the
+   * raw tool content, so Claude is steered to copy prices/links from here
+   * verbatim instead of computing or inventing them.
    * @param {Array} originalContent - toolUseResponse.content (raw MCP content blocks)
    * @param {Array} allFormattedProducts - full (unsliced) formatted product list
    * @returns {Array} content array to store in conversation history
@@ -227,12 +243,13 @@ export function createToolService() {
   const appendPriceSummaryBlock = (originalContent, allFormattedProducts) => {
     if (!allFormattedProducts.length) return originalContent;
 
-    const lines = allFormattedProducts.map(
-      (p) => `- ${p.title}: ${p.price} (id: ${p.id})`
-    );
+    const lines = allFormattedProducts.map((p) => {
+      const name = buildProductLinkSnippet(p) || p.title;
+      return `- ${name}: ${p.price} (id: ${p.id})`;
+    });
 
     const summaryText =
-      `${PRICE_SUMMARY_LABEL} (авторитетне джерело цін для цієї відповіді):\n${lines.join('\n')}`;
+      `${PRICE_SUMMARY_LABEL} (авторитетне джерело цін та посилань для цієї відповіді):\n${lines.join('\n')}`;
 
     return [
       ...(Array.isArray(originalContent) ? originalContent : []),
