@@ -185,6 +185,7 @@ async function handleChatSession({
     let conversationHistory = [];
     let productsToDisplay = [];
     let cartActionsToDisplay = [];
+    let checkoutActionsToDisplay = [];
     // Assistant-message save promises; awaited before each turn's tool_result
     // row is written so history rows stay in a valid order.
     const pendingSaves = [];
@@ -311,7 +312,8 @@ async function handleChatSession({
                   toolUseId,
                   toolResults,
                   productsToDisplay,
-                  cartActionsToDisplay
+                  cartActionsToDisplay,
+                  checkoutActionsToDisplay
                 );
               }
             } catch (error) {
@@ -393,12 +395,23 @@ async function handleChatSession({
       });
     }
 
+    // Only the latest prepare_checkout call of the turn matters
+    const checkoutAction = checkoutActionsToDisplay[checkoutActionsToDisplay.length - 1] || null;
+
     // Tell the client to write any resolved add-to-cart actions to the
-    // shopper's real storefront cart (the backend never writes it directly)
+    // shopper's real storefront cart (the backend never writes it directly).
+    // A checkout link rides along so the client shows it only once the add
+    // has actually succeeded.
     if (cartActionsToDisplay.length > 0) {
       stream.sendMessage({
         type: 'cart_add',
-        actions: cartActionsToDisplay
+        actions: cartActionsToDisplay,
+        checkout: checkoutAction
+      });
+    } else if (checkoutAction) {
+      stream.sendMessage({
+        type: 'checkout_link',
+        checkout: checkoutAction
       });
     }
   } catch (error) {

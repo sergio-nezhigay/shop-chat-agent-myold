@@ -55,8 +55,9 @@ export function createToolService() {
    * @param {Array} toolResults - Accumulator of tool_result blocks for this assistant turn
    * @param {Array} productsToDisplay - Array to add product results to
    * @param {Array} cartActionsToDisplay - Array to add real-cart write instructions to
+   * @param {Array} checkoutActionsToDisplay - Array to add checkout-prefill fields to
    */
-  const handleToolSuccess = (toolUseResponse, toolName, toolUseId, toolResults, productsToDisplay, cartActionsToDisplay = []) => {
+  const handleToolSuccess = (toolUseResponse, toolName, toolUseId, toolResults, productsToDisplay, cartActionsToDisplay = [], checkoutActionsToDisplay = []) => {
     let contentForHistory = toolUseResponse.content;
 
     // Check if this is a product search result
@@ -92,6 +93,12 @@ export function createToolService() {
     // pair the client must submit to the storefront's real AJAX Cart API.
     if (toolName === "add_to_cart" && toolUseResponse.cart_action) {
       cartActionsToDisplay.push(toolUseResponse.cart_action);
+    }
+
+    // prepare_checkout likewise only hands back fields; the client turns them
+    // into a prefilled /checkout link on the shopper's own domain.
+    if (toolName === "prepare_checkout" && toolUseResponse.checkout_action) {
+      checkoutActionsToDisplay.push(toolUseResponse.checkout_action);
     }
 
     toolResults.push(buildToolResult(toolUseId, contentForHistory));

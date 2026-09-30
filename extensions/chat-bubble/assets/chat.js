@@ -807,7 +807,15 @@
             break;
 
           case "cart_add":
-            ShopAIChat.Cart.handleCartAdd(data.actions, messagesContainer);
+            ShopAIChat.Cart.handleCartAdd(
+              data.actions,
+              messagesContainer,
+              data.checkout,
+            );
+            break;
+
+          case "checkout_link":
+            ShopAIChat.Cart.showCheckoutButton(data.checkout, messagesContainer);
             break;
 
           case "tool_use":
@@ -962,8 +970,10 @@
       /**
        * @param {Array<{variant_id: string, quantity: number}>} actions
        * @param {HTMLElement} messagesContainer
+       * @param {Object} [checkout] - Prefill fields from prepare_checkout; the
+       *   checkout button is shown only once the add has succeeded
        */
-      handleCartAdd: async function (actions, messagesContainer) {
+      handleCartAdd: async function (actions, messagesContainer, checkout) {
         if (!Array.isArray(actions) || actions.length === 0) return;
 
         const root = window.Shopify?.routes?.root || "/";
@@ -1006,9 +1016,78 @@
           ShopAIChat.UI.showCartToast(
             window.shopChatConfig?.i18n?.cartAddSuccess || "Додано в кошик!",
           );
+
+          if (checkout) this.showCheckoutButton(checkout, messagesContainer);
         } catch (error) {
           console.error("Error adding to real cart:", error);
         }
+      },
+
+      /**
+       * Normalizes a Ukrainian phone number to +380XXXXXXXXX; anything that
+       * doesn't look Ukrainian is passed through as typed.
+       * @param {string} phone
+       * @returns {string}
+       */
+      normalizePhone: function (phone) {
+        const digits = String(phone).replace(/\D/g, "");
+        if (/^380\d{9}$/.test(digits)) return "+" + digits;
+        if (/^80\d{9}$/.test(digits)) return "+3" + digits;
+        if (/^0\d{9}$/.test(digits)) return "+38" + digits;
+        return String(phone).trim();
+      },
+
+      /**
+       * Builds a /checkout link that prefills Shopify checkout from the
+       * prepare_checkout fields. It's relative to the storefront root, so it
+       * opens checkout for the shopper's real cart (same domain and cookies).
+       * zip must be 12345: the store's checkout requires one and the theme's
+       * own checkout buttons pass the same value.
+       * @param {Object} fields - first_name, last_name, phone, city, delivery_point, email
+       * @returns {string}
+       */
+      buildCheckoutUrl: function (fields) {
+        const root = window.Shopify?.routes?.root || "/";
+        const params = new URLSearchParams();
+        const address = (key, value) => {
+          if (value) params.append("checkout[shipping_address][" + key + "]", value);
+        };
+        const phone = fields.phone ? this.normalizePhone(fields.phone) : "";
+
+        address("country", "UA");
+        address("zip", "12345");
+        address("first_name", fields.first_name);
+        address("last_name", fields.last_name);
+        address("city", fields.city);
+        address("address1", fields.delivery_point);
+        address("phone", phone);
+        if (phone || fields.email) {
+          params.append("checkout[email_or_phone]", phone || fields.email);
+        }
+        if (fields.email) params.append("checkout[email]", fields.email);
+
+        return root + "checkout?" + params.toString();
+      },
+
+      /**
+       * Shows a "go to checkout" button in the chat that opens checkout with
+       * the customer's delivery details already filled in. The customer still
+       * reviews and submits the order themselves.
+       * @param {Object} fields - Prefill fields from prepare_checkout
+       * @param {HTMLElement} messagesContainer
+       */
+      showCheckoutButton: function (fields, messagesContainer) {
+        if (!fields || !messagesContainer) return;
+
+        const link = document.createElement("a");
+        link.classList.add("shop-ai-checkout-button");
+        link.href = this.buildCheckoutUrl(fields);
+        link.textContent =
+          window.shopChatConfig?.i18n?.checkoutLink ||
+          "Перейти до оформлення замовлення";
+
+        messagesContainer.appendChild(link);
+        ShopAIChat.UI.scrollToBottom();
       },
 
       /**
