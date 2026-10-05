@@ -6,7 +6,7 @@
 export const AppConfig = {
   // API Configuration
   api: {
-    defaultModel: 'claude-sonnet-5',
+    defaultModel: 'claude-sonnet-5-5',
     maxTokens: 8192,
     defaultPromptType: 'standardAssistant',
     // Hard cap on tool-use round trips per user message, so a stuck loop can't
