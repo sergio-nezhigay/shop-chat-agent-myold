@@ -11,6 +11,31 @@ import { createClaudeService } from "../services/claude.server";
 import { createToolService, sanitizeToolResultContent } from "../services/tool.server";
 import { localTools, executeLocalTool } from "../services/local-tools.server";
 import { unauthenticated } from "../shopify.server";
+import { detectReplyLanguage, detectTextLanguage } from "../services/language.server";
+
+// Fixed texts the server itself sends, per reply language.
+const SERVER_TEXTS = {
+  toolUse: {
+    uk: 'Уточнюю інформацію...',
+    ru: 'Уточняю информацию...',
+    en: 'Checking...',
+  },
+  toolCap: {
+    uk: 'Це запитання виявилося складнішим за очікуване. Уточніть, будь ласка, деталі або зверніться до менеджера.',
+    ru: 'Этот вопрос оказался сложнее, чем ожидалось. Уточните, пожалуйста, детали или обратитесь к менеджеру.',
+    en: 'This question turned out to be more complex than expected. Please add details or contact our manager.',
+  },
+  maxTokens: {
+    uk: '(Відповідь була обрізана. Попросіть продовжити або звузьте запит.)',
+    ru: '(Ответ был обрезан. Попросите продолжить или сузьте запрос.)',
+    en: '(The reply was cut off. Ask me to continue or narrow the question.)',
+  },
+  refusal: {
+    uk: 'Вибачте, я не можу відповісти на це запитання. Зверніться, будь ласка, до менеджера.',
+    ru: 'Извините, я не могу ответить на этот вопрос. Обратитесь, пожалуйста, к менеджеру.',
+    en: "Sorry, I can't answer this question. Please contact our manager.",
+  },
+};
 
 
 /**
@@ -217,6 +242,9 @@ async function handleChatSession({
       };
     });
 
+    // Decided in code: the prompt alone let ~1 in 6 replies drift to Ukrainian.
+    const replyLanguage = detectReplyLanguage(conversationHistory);
+
     // Execute the conversation stream
     let finalMessage = { role: 'user', content: userMessage };
     let turn = 0;
@@ -236,6 +264,7 @@ async function handleChatSession({
         {
           messages: conversationHistory,
           promptType,
+          replyLanguage,
           tools: mcpClient.tools
         },
         {
@@ -274,7 +303,7 @@ async function handleChatSession({
             const toolArgs = content.input;
             const toolUseId = content.id;
 
-            const toolUseMessage = `Уточнюю інформацію...`;
+            const toolUseMessage = SERVER_TEXTS.toolUse[replyLanguage];
             //const toolUseMessage = `Calling tool: ${toolName} with arguments: ${JSON.stringify(toolArgs)}`;
 
             stream.sendMessage({
@@ -353,7 +382,7 @@ async function handleChatSession({
       if (stopReason === "tool_use" || stopReason === "pause_turn") {
         if (turn >= AppConfig.api.maxToolTurns) {
           console.warn(`Tool loop hit maxToolTurns (${AppConfig.api.maxToolTurns}) for ${conversationId}`);
-          const capMessage = 'Це запитання виявилося складнішим за очікуване. Уточніть, будь ласка, деталі або зверніться до менеджера.';
+          const capMessage = SERVER_TEXTS.toolCap[replyLanguage];
           stream.sendMessage({ type: 'chunk', chunk: '\n\n' + capMessage });
           stream.sendMessage({ type: 'message_complete' });
           // Persist a real assistant turn so history stays role-alternating
@@ -369,19 +398,26 @@ async function handleChatSession({
       } else if (stopReason === "max_tokens") {
         stream.sendMessage({
           type: 'chunk',
-          chunk: '\n\n(Відповідь була обрізана. Попросіть продовжити або звузьте запит.)'
+          chunk: '\n\n' + SERVER_TEXTS.maxTokens[replyLanguage]
         });
         stream.sendMessage({ type: 'message_complete' });
       } else if (stopReason === "refusal") {
         stream.sendMessage({
           type: 'chunk',
-          chunk: '\n\nВибачте, я не можу відповісти на це запитання. Зверніться, будь ласка, до менеджера.'
+          chunk: '\n\n' + SERVER_TEXTS.refusal[replyLanguage]
         });
         stream.sendMessage({ type: 'message_complete' });
       }
       // end_turn, stop_sequence, or anything else: nothing extra to send.
 
       break;
+    }
+
+    // Monitoring only (no retry, it would cost tokens): flag replies whose
+    // language differs from the target.
+    const replyTextLanguage = detectTextLanguage(finalMessage.content);
+    if (replyTextLanguage && replyTextLanguage !== replyLanguage) {
+      console.warn(`Reply language mismatch in ${conversationId}: expected ${replyLanguage}, got ${replyTextLanguage}`);
     }
 
     // Signal end of turn

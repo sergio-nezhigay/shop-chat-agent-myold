@@ -6,6 +6,7 @@ import { Anthropic } from "@anthropic-ai/sdk";
 import AppConfig from "./config.server";
 import systemPrompts from "../prompts/prompts.json";
 import standardAssistantContent from "../prompts/standard-assistant.txt?raw";
+import { languageInstruction } from "./language.server";
 
 const promptContents = {
   "standard-assistant.txt": standardAssistantContent,
@@ -26,6 +27,7 @@ export function createClaudeService(apiKey = process.env.CLAUDE_API_KEY) {
    * @param {Array} params.messages - Conversation history
    * @param {string} params.promptType - The type of system prompt to use
    * @param {Array} params.tools - Available tools for Claude
+   * @param {'uk'|'ru'|'en'} [params.replyLanguage] - Language the reply must be in
    * @param {Object} streamHandlers - Stream event handlers
    * @param {Function} streamHandlers.onText - Handles text chunks
    * @param {Function} streamHandlers.onMessage - Handles complete messages
@@ -35,7 +37,8 @@ export function createClaudeService(apiKey = process.env.CLAUDE_API_KEY) {
   const streamConversation = async ({
     messages,
     promptType = AppConfig.api.defaultPromptType,
-    tools
+    tools,
+    replyLanguage
   }, streamHandlers) => {
     // Get system prompt from configuration or use default
     const systemInstruction = getSystemPrompt(promptType);
@@ -48,7 +51,12 @@ export function createClaudeService(apiKey = process.env.CLAUDE_API_KEY) {
     const stream = await anthropic.messages.stream({
       model: AppConfig.api.defaultModel,
       max_tokens: AppConfig.api.maxTokens,
-      system: systemInstruction,
+      // The long prompt (and the tools before it) is cached; the per-turn
+      // language line sits after the breakpoint so it doesn't break the cache.
+      system: [
+        { type: "text", text: systemInstruction, cache_control: { type: "ephemeral" } },
+        ...(replyLanguage ? [{ type: "text", text: languageInstruction(replyLanguage) }] : []),
+      ],
       messages,
       tools: allTools.length > 0 ? allTools : undefined
     });
@@ -68,6 +76,8 @@ export function createClaudeService(apiKey = process.env.CLAUDE_API_KEY) {
 
     // Wait for final message
     const finalMessage = await stream.finalMessage();
+    const usage = finalMessage.usage || {};
+    console.log(`Claude usage: in=${usage.input_tokens} cache_read=${usage.cache_read_input_tokens} cache_write=${usage.cache_creation_input_tokens} out=${usage.output_tokens}`);
 
     // Block until the assistant message row is persisted, so its tool_result
     // row is never written first (an assistant turn saved after its tool_result
