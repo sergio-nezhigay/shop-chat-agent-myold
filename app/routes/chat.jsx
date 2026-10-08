@@ -214,6 +214,8 @@ async function handleChatSession({
     // Assistant-message save promises; awaited before each turn's tool_result
     // row is written so history rows stay in a valid order.
     const pendingSaves = [];
+    // The "checking..." status is shown once per customer message, not per tool call.
+    let toolNoticeSent = false;
 
     // Save user message to the database
     await saveMessage(conversationId, 'user', userMessage);
@@ -306,10 +308,13 @@ async function handleChatSession({
             const toolUseMessage = SERVER_TEXTS.toolUse[replyLanguage];
             //const toolUseMessage = `Calling tool: ${toolName} with arguments: ${JSON.stringify(toolArgs)}`;
 
-            stream.sendMessage({
-              type: 'tool_use',
-              tool_use_message: toolUseMessage
-            });
+            if (!toolNoticeSent) {
+              toolNoticeSent = true;
+              stream.sendMessage({
+                type: 'tool_use',
+                tool_use_message: toolUseMessage
+              });
+            }
 
             // Check if it's a local tool
             const isLocalTool = localTools.some(tool => tool.name === toolName);
