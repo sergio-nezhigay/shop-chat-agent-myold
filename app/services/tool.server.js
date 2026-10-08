@@ -154,7 +154,8 @@ export function createToolService() {
 
   /**
    * Formats a money object ({ amount, currency }) into a deterministic
-   * display string. Amounts are minor currency units (e.g. 248300 = 2483.00 UAH).
+   * display string. Amounts are minor currency units (e.g. 248300 = "2483 грн",
+   * 32950 = "329.50 грн"). UAH is shown as "грн" in every reply language.
    * @param {{amount: number|string, currency: string}} money
    * @returns {string|null}
    */
@@ -162,7 +163,9 @@ export function createToolService() {
     if (!money || !money.currency) return null;
     const amount = Number(money.amount);
     if (!Number.isFinite(amount)) return null;
-    return `${(amount / 100).toFixed(2)} ${money.currency}`;
+    const value = amount % 100 === 0 ? String(amount / 100) : (amount / 100).toFixed(2);
+    const currency = money.currency === 'UAH' ? 'грн' : money.currency;
+    return `${value} ${currency}`;
   };
 
   /**
