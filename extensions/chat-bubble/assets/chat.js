@@ -683,11 +683,6 @@
           // Fix: Define shopId from config or fallback
           const shopId = window.shopChatConfig?.shopId || "";
 
-          // Fix: Use streamUrl as base for historyUrl
-          const historyUrl = streamUrl;
-          const fullHistoryUrl = `${historyUrl}?history=true&conversation_id=${encodeURIComponent(conversationId)}`;
-          console.log("Fetching history from:", fullHistoryUrl);
-
           const response = await fetch(streamUrl, {
             method: "POST",
             headers: {
@@ -697,7 +692,6 @@
             },
             body: requestBody,
           });
-          console.log("response", JSON.stringify(response, null, 2));
 
           const reader = response.body.getReader();
           const decoder = new TextDecoder();
@@ -881,7 +875,6 @@
               ? "https://localhost:3458/chat"
               : "https://shop-chat-agent-lively-fog-4926.fly.dev/chat");
           const fullHistoryUrl = `${historyUrl}?history=true&conversation_id=${encodeURIComponent(conversationId)}`;
-          console.log("Fetching history from:", fullHistoryUrl);
 
           const response = await fetch(fullHistoryUrl, {
             method: "GET",
@@ -1263,7 +1256,6 @@
       startTokenPolling: function (conversationId, messagesContainer) {
         if (!conversationId) return;
 
-        console.log("Starting token polling for conversation:", conversationId);
         const pollingId = "polling_" + Date.now();
         sessionStorage.setItem("shopAiTokenPollingId", pollingId);
 
@@ -1272,14 +1264,10 @@
 
         const poll = async () => {
           if (sessionStorage.getItem("shopAiTokenPollingId") !== pollingId) {
-            console.log(
-              "Another polling session has started, stopping this one",
-            );
             return;
           }
 
           if (attemptCount >= maxAttempts) {
-            console.log("Max polling attempts reached, stopping");
             return;
           }
 
@@ -1298,7 +1286,6 @@
             const data = await response.json();
 
             if (data.status === "authorized") {
-              console.log("Token available, resuming conversation");
               const message = sessionStorage.getItem("shopAiLastMessage");
 
               if (message) {
@@ -1322,7 +1309,6 @@
               return;
             }
 
-            console.log("Token not available yet, polling again in 10s");
             setTimeout(poll, 10000);
           } catch (error) {
             console.error("Error polling for token status:", error);

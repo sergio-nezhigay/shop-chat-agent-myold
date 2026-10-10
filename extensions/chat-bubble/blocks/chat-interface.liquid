@@ -83,6 +83,7 @@
 <script>
   window.shopChatConfig = {
     promptType: "standardAssistant",
+    shopId: "{{ shop.id }}",
     welcomeMessage: {{ 'chat.welcome' | t | json }},
     i18n: {
       noProducts: {{ 'chat.noProducts' | t | json }},
