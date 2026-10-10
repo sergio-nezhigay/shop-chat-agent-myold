@@ -115,7 +115,7 @@ function getStoreInfo(args) {
     },
     contact: {
       email: "info@informatica.com.ua",
-      phone: "+380(99) 381-5288",
+      phone: "(099) 381-5288",
       chat: "This chat is available 24/7; Viber & Telegram during working hours"
     },
     shipping: {
