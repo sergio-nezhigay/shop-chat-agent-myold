@@ -12,6 +12,17 @@
    */
   const ShopAIChat = {
     /**
+     * Push an analytics event to GTM's dataLayer. Never pass message text or
+     * personal data here.
+     * @param {string} event - Event name
+     * @param {Object} [params] - Non-personal parameters
+     */
+    track: function (event, params) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event, ...params });
+    },
+
+    /**
      * UI-related elements and functionality
      */
     UI: {
@@ -154,6 +165,7 @@
         }
 
         chatWindow.classList.add("active");
+        ShopAIChat.track("chat_open");
 
         if (this.isMobile) {
           // Prevent body scrolling; the keyboard opens only when the user taps the input
@@ -376,6 +388,7 @@
         const conversationId = sessionStorage.getItem("shopAiConversationId");
 
         this.add(userMessage, "user", messagesContainer);
+        ShopAIChat.track("chat_message");
 
         chatInput.value = "";
 
@@ -1013,6 +1026,9 @@
           }
 
           await this.refreshCartIcon();
+          ShopAIChat.track("chat_add_to_cart", {
+            items_count: items.reduce((sum, item) => sum + item.quantity, 0),
+          });
           ShopAIChat.UI.showCartToast(
             window.shopChatConfig?.i18n?.cartAddSuccess || "Додано в кошик!",
           );
@@ -1425,9 +1441,13 @@
       // Check for existing conversation
       const conversationId = sessionStorage.getItem("shopAiConversationId");
 
+      // Resolves once the saved conversation (if any) is on screen, so
+      // open() never sends before the history is rendered
+      let historyLoaded = Promise.resolve();
+
       if (conversationId) {
         // Fetch conversation history
-        this.API.fetchChatHistory(
+        historyLoaded = this.API.fetchChatHistory(
           conversationId,
           this.UI.elements.messagesContainer,
         );
@@ -1442,6 +1462,46 @@
           this.UI.elements.messagesContainer,
         );
       }
+
+      this.exposePublicApi(historyLoaded);
+    },
+
+    /**
+     * Public API for other scripts on the page (e.g. the homepage fit-check
+     * form): window.ShopAIChat.open(text, { send }) and the document event
+     * "shop-ai-chat:open" with detail.text. "shop-ai-chat:ready" fires once
+     * both are available.
+     * @param {Promise} historyLoaded - Resolves when saved history is rendered
+     */
+    exposePublicApi: function (historyLoaded) {
+      const { chatWindow, chatInput, messagesContainer } = this.UI.elements;
+
+      const open = async function (text, { send = true } = {}) {
+        // Open only if closed: toggleChatWindow() would close an open chat
+        if (!chatWindow.classList.contains("active")) {
+          ShopAIChat.UI.toggleChatWindow();
+        }
+
+        const message = typeof text === "string" ? text.trim() : "";
+        if (!message) return;
+
+        await historyLoaded;
+        chatInput.value = message;
+        if (send) {
+          ShopAIChat.Message.send(chatInput, messagesContainer);
+        } else {
+          chatInput.focus();
+        }
+      };
+
+      // The internal namespace stays private; only open() is public
+      window.ShopAIChat = { open };
+
+      document.addEventListener("shop-ai-chat:open", (event) => {
+        open(event.detail?.text);
+      });
+
+      document.dispatchEvent(new CustomEvent("shop-ai-chat:ready"));
     },
   };
 
