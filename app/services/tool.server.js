@@ -218,7 +218,8 @@ export function createToolService() {
     url: p.url,
     available: p.available,
     variant_id: p.variant_id,
-    description: stripHtml(p.description).slice(0, 400)
+    // Long enough to reach the specs block (e.g. connector size) in typical descriptions.
+    description: stripHtml(p.description).slice(0, 1200)
   });
 
   // Must stay byte-identical to the label referenced in
