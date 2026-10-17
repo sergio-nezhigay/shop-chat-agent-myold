@@ -244,6 +244,11 @@ async function handleChatSession({
       };
     });
 
+    // Every row here belongs to earlier customer messages (the current one is
+    // a plain string). Their search/catalog results were 20–47k chars each and
+    // re-billed on every later turn; the replies already state what was found.
+    conversationHistory = dropPastToolOutput(conversationHistory);
+
     // Decided in code: the prompt alone let ~1 in 6 replies drift to Ukrainian.
     const replyLanguage = detectReplyLanguage(conversationHistory);
 
@@ -459,6 +464,40 @@ async function handleChatSession({
     // The streaming handler takes care of error handling
     throw error;
   }
+}
+
+/**
+ * Reduces finished turns to their plain text: drops thinking, tool_use,
+ * server_tool_use, web_search_tool_result and tool_result blocks (and
+ * citations, which point into the dropped search results), then removes
+ * emptied rows and merges same-role neighbours so roles still alternate.
+ * @param {Array<{role: string, content: string|Array}>} messages
+ * @returns {Array<{role: string, content: string|Array}>}
+ */
+function dropPastToolOutput(messages) {
+  const result = [];
+  for (const message of messages) {
+    let content = message.content;
+    if (Array.isArray(content)) {
+      content = content
+        .filter(block => block?.type === 'text' && block.text?.trim())
+        .map(block => ({ type: 'text', text: block.text }));
+      if (content.length === 0) continue;
+    } else {
+      // A typed "2540" survives the JSON.parse on load as a number.
+      content = String(content ?? '');
+      if (!content.trim()) continue;
+    }
+
+    const previous = result[result.length - 1];
+    if (previous && previous.role === message.role) {
+      const toBlocks = (c) => typeof c === 'string' ? [{ type: 'text', text: c }] : c;
+      previous.content = [...toBlocks(previous.content), ...toBlocks(content)];
+    } else {
+      result.push({ role: message.role, content });
+    }
+  }
+  return result;
 }
 
 /**
