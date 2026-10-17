@@ -103,6 +103,6 @@ export function detectTextLanguage(content) {
 export function languageInstruction(lang) {
   const name = LANGUAGE_NAMES[lang];
   return `Reply language for this turn: ${name}. Write every sentence in ${name}, ` +
-    `including the fixed closing lines and caveats (use their ${name} version). ` +
+    `including the fixed closing line (translate it if needed). ` +
     `Keep product names, prices and [links](url) exactly as given.`;
 }

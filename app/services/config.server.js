@@ -7,7 +7,10 @@ export const AppConfig = {
   // API Configuration
   api: {
     defaultModel: 'claude-haiku-5-5',
-    maxTokens: 8192,
+    // Replies are 2–3 sentences; the cap only bounds runaway output.
+    maxTokens: 2048,
+    // Each search costs a fee plus ~5–12k input tokens of results.
+    webSearchMaxUses: 1,
     defaultPromptType: 'standardAssistant',
     // Hard cap on tool-use round trips per user message, so a stuck loop can't
     // re-invoke Claude forever.

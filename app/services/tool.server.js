@@ -218,8 +218,9 @@ export function createToolService() {
     url: p.url,
     available: p.available,
     variant_id: p.variant_id,
-    // Long enough to reach the specs block (e.g. connector size) in typical descriptions.
-    description: stripHtml(p.description).slice(0, 1200)
+    // Specs (connector size, wattage) appear within the first ~720 chars or
+    // only past 2600, so 800 keeps everything the old 1200 cut-off reached.
+    description: stripHtml(p.description).slice(0, 800)
   });
 
   // Must stay byte-identical to the label referenced in

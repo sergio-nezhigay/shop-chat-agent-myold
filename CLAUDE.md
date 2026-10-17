@@ -6,7 +6,9 @@ Shopify app (Remix + Prisma/SQLite) that serves an AI chat widget on the storefr
 
 ## Important Implementation Notes
 
-- System prompts are in `app/prompts/prompts.json`, in English and Ukrainian.
+- The system prompt is `app/prompts/standard-assistant.txt` (Ukrainian; the reply language is picked in code by `app/services/language.server.js`).
+- Prompt budget: `standard-assistant.txt` must stay ≤ 8 KB (`wc -c`). A new rule must replace or shorten an existing one; don't add UA/RU/EN copies of phrases.
+- Past turns are sent to Claude as text only (`dropPastToolOutput` in `app/routes/chat.jsx`); search/catalog results are re-billed only within the current message.
 - Customer authentication uses the OAuth 2.0 PKCE flow.
 - The frontend extension includes IP-based feature gating.
 

@@ -44,7 +44,11 @@ export function createClaudeService(apiKey = process.env.CLAUDE_API_KEY) {
     const systemInstruction = getSystemPrompt(promptType);
 
     // Add Anthropic's built-in web search tool (server-side, no API key needed)
-    const webSearchTool = { type: "web_search_20250305", name: "web_search" };
+    const webSearchTool = {
+      type: "web_search_20250305",
+      name: "web_search",
+      max_uses: AppConfig.api.webSearchMaxUses
+    };
     const allTools = [webSearchTool, ...(tools || [])];
 
     // Create stream
