@@ -262,7 +262,13 @@ export function createToolService() {
       const warranty = !p.warranty_months ? ''
         : p.warranty_months === 99 ? ', гарантія довічна'
         : `, гарантія ${p.warranty_months} міс.`;
-      return `- ${name}: ${p.price}${warranty} (id: ${p.id})`;
+      // "Адаптер DC 4.0×1.7 на Type-C" (арт. 1534) and similar run the other way
+      // (laptop's own DC charger -> USB-C device); the model kept offering them
+      // for charging a laptop from a power bank, so flag them right here.
+      const reverse = /DCs*[d.,]+s*[×x]s*[d.,]+.*наs*Type-?C/i.test(p.title)
+        ? ' — ПРАЦЮЄ НАВПАКИ: живить USB-C пристрій від DC-блока ноутбука; ноутбук із круглим гніздом від павербанка чи USB-C зарядки ним НЕ зарядити'
+        : '';
+      return `- ${name}: ${p.price}${warranty} (id: ${p.id})${reverse}`;
     });
 
     const summaryText =

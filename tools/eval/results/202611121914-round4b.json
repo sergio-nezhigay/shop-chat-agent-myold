@@ -1,0 +1,68 @@
+[
+  {
+    "id": "art1534-reverse",
+    "conversationId": "eval-round4b-202611121914-art1534-reverse",
+    "ms": 7771,
+    "chars": 357,
+    "answer": "Для Lenovo IdeaPad 320-17IKB підійде [Кабель живлення USB Type-C 65W DC 4.0×1.7 для ноутбуків Lenovo](https://informatica.com.ua/products/usb-type-c-65w-kabel-pitaniya-dc-4-0-1-7-lenovo-dlya-zaryadki-noutbuka-ot-poverbanka-usb) — 399 грн. Адаптер арт. 1534 для цього не годиться, бо працює в інший бік. Перевірте, що штекер 4.0×1.7 мм, а павербанк дає 20 В.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"Type-C DC 4.0 1.7\"}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "baseus-have-cable",
+    "conversationId": "eval-round4b-202611121914-baseus-have-cable",
+    "ms": 7497,
+    "chars": 390,
+    "answer": "Для вашого кабелю підійде [Адаптер DC 4.0×1.7 на Type-C 100W E-marke](https://informatica.com.ua/products/adapter-s-dc-4-0-1-7-na-type-c-100w-e-marke-perekhodnik-preobrazovatel-pitaniya-dlya-zaryadki-noutbuka-ot-poverb) — 389 грн. Це насадка, яка під'єднується до вашого USB-C кабелю, тому купувати новий кабель не потрібно. Перевірте, що штекер 4.0×1.7 мм, а павербанк чи зарядка дає 20 В.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"перехідник Type-C DC 4.0 1.7\"}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "en-xiaomi",
+    "conversationId": "eval-round4b-202611121914-en-xiaomi",
+    "ms": 5365,
+    "chars": 394,
+    "answer": "For the Xiaomi Redmi Book 15, I recommend the [Кабель живлення USB Type-C 65W DC 4.0×1.7 для ноутбуків Lenovo](https://informatica.com.ua/products/usb-type-c-65w-kabel-pitaniya-dc-4-0-1-7-lenovo-dlya-zaryadki-noutbuka-ot-poverbanka-usb) for 399 грн. Its 65 W rating matches the laptop's original charger. Please make sure your power bank or charger outputs 20 V and that the plug is 4.0×1.7 mm.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua\"}},\"catalog\":{\"query\":\"Type-C DC 4.0 1.7\"}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  }
+]
