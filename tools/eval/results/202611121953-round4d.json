@@ -1,0 +1,46 @@
+[
+  {
+    "id": "art1534-reverse",
+    "conversationId": "eval-round4d-202611121953-art1534-reverse",
+    "ms": 7531,
+    "chars": 405,
+    "answer": "Ні, арт. 1534 не підійде: він працює навпаки, тобто живить USB-C пристрій від блока ноутбука, а не навпаки. Для IdeaPad 320-17IKB підійде [Кабель живлення USB Type-C 65W DC 4.0×1.7 для ноутбуків Lenovo](https://informatica.com.ua/products/usb-type-c-65w-kabel-pitaniya-dc-4-0-1-7-lenovo-dlya-zaryadki-noutbuka-ot-poverbanka-usb) — 399 грн. Перевірте, що штекер 4.0×1.7 мм, а павербанк чи зарядка дає 20 В.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"перехідник USB Type-C DC 4.0 1.7\"}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "baseus-have-cable",
+    "conversationId": "eval-round4d-202611121953-baseus-have-cable",
+    "ms": 6155,
+    "chars": 372,
+    "answer": "Так, підійде перехідник, який під'єднується до вашого кабелю Baseus. Раджу [Перехідник USB Type-C на DC 4.0x1.7mm + PD Triger 19.5V 100W для Lenovo](https://informatica.com.ua/products/perekhodnik-usb-type-c-na-dc-4-0x1-7mm-pd-triger-19-5v-100w-dlya-lenovo-dlya-zaryadki-noutbuka-ot-poverbanka) за 309 грн. Перевірте, що штекер 4.0×1.7 мм, а павербанк чи зарядка дає 20 В.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"Перехідник USB Type-C на DC 4.0 1.7\"}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  }
+]
