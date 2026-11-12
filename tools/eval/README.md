@@ -16,11 +16,11 @@ Ask a Sonnet subagent to grade the results file against `questions.json` and `ot
 (the owner's policy: required lines, known laptops, traps), using this rubric, and write
 `results/<stamp>-<label>.score.md`:
 
-- 5 — correct verdict and facts, right product, required lines present, short (≤ ~450 chars), right language (Russian-speaking customers get Ukrainian; English gets English).
+- 5 — correct facts, right product, required lines present, short (≤ ~350 chars), right language (Russian-speaking customers get Ukrainian; English gets English). Site-form requests ("Шукаю/Looking for … Модель") start with the product, not "Так/Yes, it will fit"; the 14-day return line only when fit is uncertain.
 - 4 — correct, one small miss (a missing required line, slightly long, extra product).
 - 3 — usable but notable miss (no product offered when one exists, vague warranty, English fragments).
 - 2 — misleading (wrong plug/RAM type, wrong verdict on a trap, invented certainty).
 - 1 — wrong or harmful ("we don't have it" when we do, says incompatible thing works), or error.
 
-Score table: id | score | main issue. Then total /125 and the tool-call count (cost signal).
+Score table: id | score | main issue. Then total /130 and the tool-call count (cost signal).
 Compare with the previous score file; a change ships only if total ≥ baseline and no case drops by 2+.

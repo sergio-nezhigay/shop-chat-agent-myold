@@ -22,7 +22,7 @@ const stamp = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "");
 const cases = JSON.parse(fs.readFileSync(path.join(dir, "questions.json"), "utf8"))
   .filter((c) => !only || only.includes(c.id));
 
-async function ask(message, conversationId) {
+async function ask(message, conversationId, pageProduct) {
   const res = await fetch(`${BASE}/chat`, {
     method: "POST",
     headers: {
@@ -31,7 +31,7 @@ async function ask(message, conversationId) {
       Origin: ORIGIN,
       "X-Shopify-Shop-Id": SHOP_ID,
     },
-    body: JSON.stringify({ message, conversation_id: conversationId, prompt_type: "standardAssistant" }),
+    body: JSON.stringify({ message, conversation_id: conversationId, prompt_type: "standardAssistant", page_product: pageProduct || null }),
     signal: AbortSignal.timeout(120_000),
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -72,7 +72,7 @@ for (const c of cases) {
   const conversationId = `eval-${label}-${stamp}-${c.id}`;
   const t0 = Date.now();
   try {
-    const { text, events } = await ask(c.message, conversationId);
+    const { text, events } = await ask(c.message, conversationId, c.page_product);
     const tools = await toolUsage(conversationId);
     results.push({ id: c.id, conversationId, ms: Date.now() - t0, chars: text.length, answer: text, tools, events });
     console.log(`${c.id}: ${text.length} chars, ${tools.length} tool calls, ${Date.now() - t0} ms`);

@@ -1,35 +1,35 @@
 [
   {"id": "acer-a515-56", "src": "prod 1794397157196",
    "message": "Вітаю! (з каталогу перехідників для зарядки ноутбука)\nШукаю: кабель для зарядки ноутбука\nМодель ноутбука: Acer Aspire 5 A515-56 Core i3/8/512/Win11S (NX.AASAA.002)",
-   "expect": {"verdict": "offer product", "facts": ["штекер 3.0×1.1 мм", "19 В"], "product_hint": "USB Type-C 65W кабель живлення DC 3.0×1.1 для ноутбука Acer Aspire", "required": ["20 В power-bank line", "return line"], "must_not": ["5.5×1.7"]}},
+   "expect": {"verdict": "starts with the product (form request: no Так/Yes opener)", "facts": ["штекер 3.0×1.1 мм", "19 В"], "product_hint": "USB Type-C 65W кабель живлення DC 3.0×1.1 для ноутбука Acer Aspire", "required": ["20 В line"], "must_not": ["5.5×1.7"]}},
 
   {"id": "lenovo-loq-230w", "src": "prod 1794210765925",
    "message": "Вітаю! (з головної)\nШукаю: кабель для зарядки ноутбука\nМодель ноутбука: Lenovo LOQ 15AHP9",
-   "expect": {"verdict": "Так, with low-wattage line", "facts": ["прямокутний штекер 11.0×4.5", "оригінал 170–230 Вт, Type-C максимум 100 Вт → в іграх заряд повільніший"], "product_hint": "USB-C → rectangular 11.0×4.5 Lenovo cable/adapter", "required": ["low-wattage line", "20 В line", "return line"], "must_not": ["Ні, не підійде", "English fragments like 'Slim Tip'"]}},
+   "expect": {"verdict": "Так, with low-wattage line", "facts": ["прямокутний штекер 11.0×4.5", "оригінал 170–230 Вт, Type-C максимум 100 Вт → в іграх заряд повільніший"], "product_hint": "USB-C → rectangular 11.0×4.5 Lenovo cable/adapter", "required": ["low-wattage line", "20 В line"], "must_not": ["Ні, не підійде", "English fragments like 'Slim Tip'"]}},
 
   {"id": "lenovo-loq-arp10e-form", "src": "other.rules example",
    "message": "Здравствуйте! Подойдёт ли USB Type-C 100W адаптер DC 11.0×4.5 прямоугольный для Lenovo LOQ15ARP10E?",
-   "expect": {"verdict": "Так, підійде (reply in Ukrainian: owner policy for RU customers)", "facts": ["11.0×4.5", "оригинал 135–230 Вт, Type-C максимум 100 Вт"], "required": ["low-wattage line", "20 В line", "return line"], "must_not": ["не підійде"]}},
+   "expect": {"verdict": "Так, підійде (reply in Ukrainian: owner policy for RU customers)", "facts": ["11.0×4.5", "оригинал 135–230 Вт, Type-C максимум 100 Вт"], "required": ["low-wattage line", "20 В line"], "must_not": ["не підійде"]}},
 
   {"id": "surface-1769", "src": "prod 1794421084782",
    "message": "Здравствуйте! (из каталога переходников для зарядки ноутбука)\nИщу: кабель для зарядки ноутбука\nМодель ноутбука: Microsoft Surface 1769",
-   "expect": {"verdict": "offer product", "facts": ["Surface Laptop (1769) — роз'єм Surface Connect, 15 В"], "product_hint": "Type-C USB C кабель 15V PD для Microsoft Surface", "must_not": ["такого кабелю немає", "12V Surface Pro 2 cable"]}},
+   "expect": {"verdict": "starts with the product (form request: no Так/Yes opener)", "facts": ["Surface Laptop (1769) — роз'єм Surface Connect, 15 В"], "product_hint": "Type-C USB C кабель 15V PD для Microsoft Surface", "must_not": ["такого кабелю немає", "12V Surface Pro 2 cable"]}},
 
   {"id": "acer-f5-571g", "src": "prod 1794401481813",
    "message": "Вітаю! (з головної)\nШукаю: кабель для зарядки ноутбука\nМодель ноутбука: acer f5-571g-37mv",
-   "expect": {"verdict": "offer product", "facts": ["5.5×1.7 мм", "19 В"], "product_hint": "USB-C → DC 5.5×1.7 cable", "required": ["20 В line", "return line"]}},
+   "expect": {"verdict": "starts with the product (form request: no Так/Yes opener)", "facts": ["5.5×1.7 мм", "19 В"], "product_hint": "USB-C → DC 5.5×1.7 cable", "required": ["20 В line"]}},
 
   {"id": "vivobook-x1404va-intenso", "src": "prod 1794388927609",
    "message": "Доброго дня! Підкажіть, будь ласка, у мене Asus Vivobook 14 X1404VA, хочу заряджати від павербанка Intenso на 65 Вт. Оригінальний блок 19 В. Чи підійде ваш кабель і чи не страшно, що павербанк дає 20 В?",
-   "expect": {"verdict": "Так (if connector found) — connector must come from a search, not memory", "facts": ["19 В ноутбук нормально працює від 20 В PD — так і задумано", "павербанк має видавати 20 В PD"], "required": ["return line"], "notes": "X1404VA plug size unverified — grader: accept 4.0×1.35 or 4.5×3.0 only if bot cites a search; penalise invented certainty"}},
+   "expect": {"verdict": "Так (if connector found) — connector must come from a search, not memory", "facts": ["19 В ноутбук нормально працює від 20 В PD — так і задумано", "павербанк має видавати 20 В PD"], "required": [], "notes": "X1404VA plug size unverified — grader: accept 4.0×1.35 or 4.5×3.0 only if bot cites a search; penalise invented certainty"}},
 
   {"id": "lenovo-v15-g2", "src": "prod 1794340831384",
    "message": "Вітаю! (з головної)\nШукаю: кабель для зарядки ноутбука\nМодель ноутбука: Lenovo V15 G2 ALC",
-   "expect": {"verdict": "offer product", "facts": ["4.0×1.7 мм", "20 В, 45–65 Вт"], "product_hint": "USB Type-C 100W кабель живлення DC 4.0×1.7", "required": ["20 В line", "return line"], "must_not": ["English fragments like '20V 3.25A 65Watt'"]}},
+   "expect": {"verdict": "starts with the product (form request: no Так/Yes opener)", "facts": ["4.0×1.7 мм", "20 В, 45–65 Вт"], "product_hint": "USB Type-C 100W кабель живлення DC 4.0×1.7", "required": ["20 В line"], "must_not": ["English fragments like '20V 3.25A 65Watt'"]}},
 
   {"id": "asus-x302u-hoco65", "src": "prod 1794310007601",
    "message": "Привіт! Підкажіть, будь ласка, чи сумісний перехідник USB-C PD 100W → DC 4,0 × 1,35 мм, 19V із ноутбуком ASUS X302U (19V, 2.37A, 45W) та павербанком Hoco DB03 Max Centurion 100000 mAh 65W? Чи забезпечує він потрібну вихідну напругу 19 В? Чи є гарантія?",
-   "expect": {"verdict": "Так", "facts": ["4.0×1.35", "Hoco 65 W is fine, 20 В PD needed"], "required": ["return line", "concrete warranty term (from product warranty field)"], "must_not": ["'гарантія вказана на сторінці товару' without a term"]}},
+   "expect": {"verdict": "Так", "facts": ["4.0×1.35", "Hoco 65 W is fine, 20 В PD needed"], "required": ["concrete warranty term (from product warranty field)"], "must_not": ["'гарантія вказана на сторінці товару' without a term"]}},
 
   {"id": "hoco-100w-trap", "src": "other.rules trap",
    "message": "Чи підійде ваш кабель Type-C на DC 4.0×1.7 до Lenovo V15 G2, якщо заряджати від павербанка Hoco J121 100W?",
@@ -45,11 +45,11 @@
 
   {"id": "vivobook-x1504za-ram", "src": "other.rules known",
    "message": "Чи підійде SO-DIMM DDR4 16GB 3200 Kingston до Asus Vivobook 15 X1504ZA?",
-   "expect": {"verdict": "Так", "facts": ["8 ГБ впаяно + 1 слот SO-DIMM DDR4-3200", "разом буде 24 ГБ"], "required": ["return line"]}},
+   "expect": {"verdict": "Так", "facts": ["8 ГБ впаяно + 1 слот SO-DIMM DDR4-3200", "разом буде 24 ГБ"], "required": []}},
 
   {"id": "msi-thin15-b12", "src": "other.rules example",
    "message": "Чи підійде кабель DC 4.5×3.0 (арт. 2738)? Модель: MSI Thin 15 B12",
-   "expect": {"verdict": "Так, with low-wattage line", "facts": ["4.5×3.0", "оригінал 120 Вт, Type-C максимум 100 Вт"], "required": ["low-wattage line", "20 В line", "return line"]}},
+   "expect": {"verdict": "Так, with low-wattage line", "facts": ["4.5×3.0", "оригінал 120 Вт, Type-C максимум 100 Вт"], "required": ["low-wattage line", "20 В line"]}},
 
   {"id": "dell-latitude-7450", "src": "other.rules example",
    "message": "Will USB Type-C to DC 7.4×5.0 adapter for HP fit? Laptop: Dell Latitude 7450",
@@ -65,15 +65,15 @@
 
   {"id": "baseus-have-cable", "src": "other.rules example",
    "message": "У мене вже є кабель Baseus 100 Вт Type-C, чи є щось на DC 4.0×1.7?",
-   "expect": {"verdict": "Так, є — adapter (not a full cable)", "facts": ["USB Type-C 100W адаптер на DC 4.0×1.7 plugs onto their Baseus cable"], "required": ["return line"]}},
+   "expect": {"verdict": "Так, є — adapter (not a full cable)", "facts": ["USB Type-C 100W адаптер на DC 4.0×1.7 plugs onto their Baseus cable"], "required": []}},
 
   {"id": "acer-a317-52", "src": "other.rules known",
    "message": "Вітаю! (з головної)\nШукаю: кабель для зарядки ноутбука\nМодель ноутбука: Acer Aspire 3 A317-52",
-   "expect": {"verdict": "offer product", "facts": ["5.5×1.7", "19 В"], "required": ["20 В line", "return line"]}},
+   "expect": {"verdict": "starts with the product (form request: no Так/Yes opener)", "facts": ["5.5×1.7", "19 В"], "required": ["20 В line"]}},
 
   {"id": "dell-inspiron-3530", "src": "other.rules known",
    "message": "Здравствуйте! (с главной)\nИщу: кабель для зарядки ноутбука\nМодель ноутбука: Dell Inspiron 15 3530",
-   "expect": {"verdict": "offer product (reply in Ukrainian: owner policy for RU customers)", "facts": ["4.5×3.0", "65 Вт"], "product_hint": "USB Type-C 65W/100W кабель живлення DC 4.5×3.0*0.6 Dell", "required": ["20 В line", "return line"]}},
+   "expect": {"verdict": "starts with the product, no Так/Yes opener (reply in Ukrainian: owner policy for RU customers)", "facts": ["4.5×3.0", "65 Вт"], "product_hint": "USB Type-C 65W/100W кабель живлення DC 4.5×3.0*0.6 Dell", "required": ["20 В line"]}},
 
   {"id": "hp-family-ask-model", "src": "other.rules",
    "message": "Підійде ваш кабель до HP 250?",
@@ -97,5 +97,11 @@
 
   {"id": "en-xiaomi", "src": "other.rules known",
    "message": "Hello! (from the homepage)\nLooking for: laptop charging cable\nLaptop model: Xiaomi Redmi Book 15",
-   "expect": {"verdict": "offer product (reply in English)", "facts": ["4.0×1.7", "19.5 V 65 W"], "required": ["20 V line", "return line"]}}
+   "expect": {"verdict": "starts with the product, no Так/Yes opener (reply in English)", "facts": ["4.0×1.7", "19.5 V 65 W"], "required": ["20 V line"]}}
+,
+
+  {"id": "vostro-this-page", "src": "prod 1794495486934 + page context",
+   "page_product": "USB Type-C 65W кабель живлення DC 7.4×5.0*0.6 для зарядки ноутбука Dell",
+   "message": "який кабель краще обрати для DELL Vostro 1000 - цей чи той, що на 100Вт?",
+   "expect": {"verdict": "this 65 W cable is enough (original 65 W); 100 W also works but not needed", "facts": ["7.4×5.0", "19.5 В 65 Вт"], "must_not": ["asks for a link to 'цей'", "Так, підійде opener"]}}
 ]

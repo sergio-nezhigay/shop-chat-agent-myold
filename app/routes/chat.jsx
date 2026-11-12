@@ -114,6 +114,11 @@ async function handleChatRequest(request) {
     // Generate or use existing conversation ID
     const conversationId = body.conversation_id || Date.now().toString();
     const promptType = body.prompt_type || AppConfig.api.defaultPromptType;
+    // Title of the product page the widget is open on (sent by chat.js), so
+    // "цей кабель" / "this one" can be resolved.
+    const pageProduct = typeof body.page_product === 'string'
+      ? body.page_product.trim().slice(0, 200) || null
+      : null;
 
     // Create a stream for the response
     const responseStream = createSseStream(async (stream) => {
@@ -122,6 +127,7 @@ async function handleChatRequest(request) {
         userMessage,
         conversationId,
         promptType,
+        pageProduct,
         stream
       });
     });
@@ -145,6 +151,7 @@ async function handleChatRequest(request) {
  * @param {string} params.userMessage - The user's message
  * @param {string} params.conversationId - The conversation ID
  * @param {string} params.promptType - The prompt type
+ * @param {string|null} params.pageProduct - Product title of the page the shopper is on
  * @param {Object} params.stream - Stream manager for sending responses
  */
 async function handleChatSession({
@@ -152,6 +159,7 @@ async function handleChatSession({
   userMessage,
   conversationId,
   promptType,
+  pageProduct,
   stream
 }) {
   // Initialize services
@@ -273,6 +281,7 @@ async function handleChatSession({
           messages: conversationHistory,
           promptType,
           replyLanguage,
+          pageProduct,
           tools: mcpClient.tools
         },
         {

@@ -672,6 +672,7 @@
             message: userMessage,
             conversation_id: conversationId,
             prompt_type: promptType,
+            page_product: window.shopChatConfig?.pageProduct || null,
           });
 
           const streamUrl =

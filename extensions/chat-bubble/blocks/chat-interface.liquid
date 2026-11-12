@@ -84,6 +84,7 @@
   window.shopChatConfig = {
     promptType: "standardAssistant",
     shopId: "{{ shop.id }}",
+    pageProduct: {% if product %}{{ product.title | json }}{% else %}null{% endif %},
     welcomeMessage: {{ 'chat.welcome' | t | json }},
     i18n: {
       noProducts: {{ 'chat.noProducts' | t | json }},
