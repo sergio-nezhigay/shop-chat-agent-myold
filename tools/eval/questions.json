@@ -9,7 +9,7 @@
 
   {"id": "lenovo-loq-arp10e-form", "src": "other.rules example",
    "message": "Здравствуйте! Подойдёт ли USB Type-C 100W адаптер DC 11.0×4.5 прямоугольный для Lenovo LOQ15ARP10E?",
-   "expect": {"verdict": "Да, подойдёт (reply in Russian)", "facts": ["11.0×4.5", "оригинал 135–230 Вт, Type-C максимум 100 Вт"], "required": ["low-wattage line", "20 В line", "return line"], "must_not": ["не подойдёт"]}},
+   "expect": {"verdict": "Так, підійде (reply in Ukrainian: owner policy for RU customers)", "facts": ["11.0×4.5", "оригинал 135–230 Вт, Type-C максимум 100 Вт"], "required": ["low-wattage line", "20 В line", "return line"], "must_not": ["не підійде"]}},
 
   {"id": "surface-1769", "src": "prod 1794421084782",
    "message": "Здравствуйте! (из каталога переходников для зарядки ноутбука)\nИщу: кабель для зарядки ноутбука\nМодель ноутбука: Microsoft Surface 1769",
@@ -73,7 +73,7 @@
 
   {"id": "dell-inspiron-3530", "src": "other.rules known",
    "message": "Здравствуйте! (с главной)\nИщу: кабель для зарядки ноутбука\nМодель ноутбука: Dell Inspiron 15 3530",
-   "expect": {"verdict": "offer product (reply in Russian)", "facts": ["4.5×3.0", "65 Вт"], "product_hint": "USB Type-C 65W/100W кабель живлення DC 4.5×3.0*0.6 Dell", "required": ["20 В line", "return line"]}},
+   "expect": {"verdict": "offer product (reply in Ukrainian: owner policy for RU customers)", "facts": ["4.5×3.0", "65 Вт"], "product_hint": "USB Type-C 65W/100W кабель живлення DC 4.5×3.0*0.6 Dell", "required": ["20 В line", "return line"]}},
 
   {"id": "hp-family-ask-model", "src": "other.rules",
    "message": "Підійде ваш кабель до HP 250?",

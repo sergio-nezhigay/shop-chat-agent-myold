@@ -89,7 +89,9 @@ export function detectReplyLanguage(history) {
     const msg = history[i];
     if (msg.role !== "user") continue;
     const lang = classifyText(stripCatalogText(textOf(msg.content)));
-    if (lang) return lang;
+    // Owner policy (same as the site bot): Russian-speaking customers get
+    // Ukrainian replies; only English gets its own language.
+    if (lang) return lang === "ru" ? "uk" : lang;
   }
   return "uk";
 }

@@ -16,7 +16,7 @@ Ask a Sonnet subagent to grade the results file against `questions.json` and `ot
 (the owner's policy: required lines, known laptops, traps), using this rubric, and write
 `results/<stamp>-<label>.score.md`:
 
-- 5 — correct verdict and facts, right product, required lines present, short (≤ ~450 chars), right language.
+- 5 — correct verdict and facts, right product, required lines present, short (≤ ~450 chars), right language (Russian-speaking customers get Ukrainian; English gets English).
 - 4 — correct, one small miss (a missing required line, slightly long, extra product).
 - 3 — usable but notable miss (no product offered when one exists, vague warranty, English fragments).
 - 2 — misleading (wrong plug/RAM type, wrong verdict on a trap, invented certainty).
