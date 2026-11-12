@@ -14,4 +14,5 @@
 - Xiaomi Redmi Book 15: 4.0×1.7, 19.5 В 65 Вт.
 - HP EliteBook 840 G6: зазвичай USB-C, але буває гніздо 4.5 мм → запитай, який штекер у їхнього блока.
 - Блок HP 710412-001 (19.5 В 65 Вт, синій наконечник): 4.5×3.0 → арт. 2513 підходить.
+- Microsoft Surface (Pro 4–8, Laptop 1/2 = 1769, Book): магнітний роз'єм Surface Connect, 15 В → «Type-C кабель/перехідник 15V PD для Microsoft Surface» (шукай «Surface 15V»). Surface Pro 1/2/RT: 12 В-кабель.
 </known_devices>
