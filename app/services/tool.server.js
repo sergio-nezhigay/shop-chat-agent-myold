@@ -196,6 +196,7 @@ export function createToolService() {
         : product.description?.html) || '',
       url: product.url || '',
       variant_id: product.variants?.[0]?.id || null,
+      warranty_months: product.warranty_months || null,
       available: product.available
         ?? product.variants?.[0]?.availability?.available
         ?? null
@@ -257,7 +258,17 @@ export function createToolService() {
 
     const lines = allFormattedProducts.map((p) => {
       const name = buildProductLinkSnippet(p) || p.title;
-      return `- ${name}: ${p.price} (id: ${p.id})`;
+      // 99 in custom.warranty is the owner's code for a lifetime warranty.
+      const warranty = !p.warranty_months ? ''
+        : p.warranty_months === 99 ? ', гарантія довічна'
+        : `, гарантія ${p.warranty_months} міс.`;
+      // "Адаптер DC 4.0×1.7 на Type-C" (арт. 1534) and similar run the other way
+      // (laptop's own DC charger -> USB-C device); the model kept offering them
+      // for charging a laptop from a power bank, so flag them right here.
+      const reverse = /DCs*[d.,]+s*[×x]s*[d.,]+.*наs*Type-?C/i.test(p.title)
+        ? ' — ПРАЦЮЄ НАВПАКИ: живить USB-C пристрій від DC-блока ноутбука; ноутбук із круглим гніздом від павербанка чи USB-C зарядки ним НЕ зарядити'
+        : '';
+      return `- ${name}: ${p.price}${warranty} (id: ${p.id})${reverse}`;
     });
 
     const summaryText =

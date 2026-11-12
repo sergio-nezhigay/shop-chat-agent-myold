@@ -16,6 +16,8 @@ Shopify app (Remix + Prisma/SQLite) that serves an AI chat widget on the storefr
 
 No test framework. Test the `/chat` endpoint directly for API checks.
 
+Answer quality: `node tools/eval/run.mjs --label <name>` replays 25 questions against live `/chat` (~$0.5, Haiku); grade with a Sonnet subagent per `tools/eval/README.md`. Device facts live in `app/prompts/known-devices.txt` (outside the 8 KB budget); owner policy source: `other.rules.md`.
+
 Mobile layout/keyboard behaviour can't be judged in desktop DevTools device mode — use the real-Android kit in `tools/mobile-research/README.md`.
 
 ## Deployment

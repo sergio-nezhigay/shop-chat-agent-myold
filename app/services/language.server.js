@@ -89,7 +89,9 @@ export function detectReplyLanguage(history) {
     const msg = history[i];
     if (msg.role !== "user") continue;
     const lang = classifyText(stripCatalogText(textOf(msg.content)));
-    if (lang) return lang;
+    // Owner policy (same as the site bot): Russian-speaking customers get
+    // Ukrainian replies; only English gets its own language.
+    if (lang) return lang === "ru" ? "uk" : lang;
   }
   return "uk";
 }
@@ -103,6 +105,6 @@ export function detectTextLanguage(content) {
 export function languageInstruction(lang) {
   const name = LANGUAGE_NAMES[lang];
   return `Reply language for this turn: ${name}. Write every sentence in ${name}, ` +
-    `including the fixed closing line (translate it if needed). ` +
+    `including every fixed phrase from <required_phrases> (translate them; never leave them in Ukrainian unless the reply language is Ukrainian). ` +
     `Keep product names, prices and [links](url) exactly as given.`;
 }

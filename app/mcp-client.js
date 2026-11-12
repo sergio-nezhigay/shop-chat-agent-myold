@@ -2,6 +2,24 @@ import { generateAuthUrl } from "./auth.server";
 import { getCustomerToken } from "./db.server";
 import AppConfig from "./services/config.server";
 
+// Claude sometimes sends `catalog` as a JSON string (once with a stray "}"),
+// which made the search return unrelated products. Recover the object.
+export function parseCatalogArg(value) {
+  if (typeof value !== "string") return value;
+  let s = value.trim();
+  for (let i = 0; i < 3; i++) {
+    try {
+      const parsed = JSON.parse(s);
+      if (parsed && typeof parsed === "object") return parsed;
+      break;
+    } catch {
+      if (!s.endsWith("}")) break;
+      s = s.slice(0, -1);
+    }
+  }
+  return { query: value };
+}
+
 /**
  * Client for interacting with Model Context Protocol (MCP) API endpoints.
  * Manages connections to both customer and storefront MCP endpoints, and handles tool invocation.
@@ -245,7 +263,7 @@ class MCPClient {
   async callUcpTool(toolName, toolArgs) {
     // Build a fresh catalog object — never mutate Claude's tool input, which is
     // already stored verbatim as the assistant message.
-    const incoming = toolArgs && toolArgs.catalog ? toolArgs.catalog : (toolArgs || {});
+    const incoming = parseCatalogArg(toolArgs && toolArgs.catalog ? toolArgs.catalog : (toolArgs || {}));
     const catalog = {
       ...incoming,
       context: {
