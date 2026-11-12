@@ -8,7 +8,7 @@ export const AppConfig = {
   api: {
     defaultModel: 'claude-haiku-5-5',
     // Replies are 2–3 sentences; the cap only bounds runaway output.
-    maxTokens: 2048,
+    maxTokens: 4096, // 2048 cut off long fit answers (thinking + text)
     // Each search costs a fee plus ~5–12k input tokens of results.
     webSearchMaxUses: 1,
     defaultPromptType: 'standardAssistant',

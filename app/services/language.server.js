@@ -103,6 +103,6 @@ export function detectTextLanguage(content) {
 export function languageInstruction(lang) {
   const name = LANGUAGE_NAMES[lang];
   return `Reply language for this turn: ${name}. Write every sentence in ${name}, ` +
-    `including the fixed closing line (translate it if needed). ` +
+    `including every fixed phrase from <required_phrases> (translate them; never leave them in Ukrainian unless the reply language is Ukrainian). ` +
     `Keep product names, prices and [links](url) exactly as given.`;
 }
