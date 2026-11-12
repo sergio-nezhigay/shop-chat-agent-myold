@@ -10,6 +10,7 @@ import { createSseStream } from "../services/streaming.server";
 import { createClaudeService } from "../services/claude.server";
 import { createToolService, sanitizeToolResultContent } from "../services/tool.server";
 import { localTools, executeLocalTool } from "../services/local-tools.server";
+import { attachWarranties } from "../services/warranty.server";
 import { unauthenticated } from "../shopify.server";
 import { detectReplyLanguage, detectTextLanguage } from "../services/language.server";
 
@@ -333,6 +334,9 @@ async function handleChatSession({
               } else {
                 console.log(`Calling MCP tool: ${toolName}`);
                 toolUseResponse = await mcpClient.callTool(toolName, toolArgs);
+                if (toolName === AppConfig.tools.productSearchName && !toolUseResponse.error) {
+                  await attachWarranties(toolUseResponse);
+                }
               }
 
               // Handle tool response based on success/error

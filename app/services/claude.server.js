@@ -6,10 +6,12 @@ import { Anthropic } from "@anthropic-ai/sdk";
 import AppConfig from "./config.server";
 import systemPrompts from "../prompts/prompts.json";
 import standardAssistantContent from "../prompts/standard-assistant.txt?raw";
+import knownDevicesContent from "../prompts/known-devices.txt?raw";
 import { languageInstruction } from "./language.server";
 
 const promptContents = {
-  "standard-assistant.txt": standardAssistantContent,
+  // Owner-maintained device facts ride in the same cached system block.
+  "standard-assistant.txt": `${standardAssistantContent}\n\n${knownDevicesContent}`,
 };
 
 /**

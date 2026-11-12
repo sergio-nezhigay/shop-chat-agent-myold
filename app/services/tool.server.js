@@ -196,6 +196,7 @@ export function createToolService() {
         : product.description?.html) || '',
       url: product.url || '',
       variant_id: product.variants?.[0]?.id || null,
+      warranty_months: product.warranty_months || null,
       available: product.available
         ?? product.variants?.[0]?.availability?.available
         ?? null
@@ -257,7 +258,8 @@ export function createToolService() {
 
     const lines = allFormattedProducts.map((p) => {
       const name = buildProductLinkSnippet(p) || p.title;
-      return `- ${name}: ${p.price} (id: ${p.id})`;
+      const warranty = p.warranty_months ? `, гарантія ${p.warranty_months} міс.` : '';
+      return `- ${name}: ${p.price}${warranty} (id: ${p.id})`;
     });
 
     const summaryText =

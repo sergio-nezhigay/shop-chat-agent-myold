@@ -1,0 +1,684 @@
+[
+  {
+    "id": "acer-a515-56",
+    "conversationId": "eval-baseline-202611121226-acer-a515-56",
+    "ms": 13112,
+    "chars": 407,
+    "answer": "Скоріше за все, підійде. За інформацією з інтернету, для цієї моделі зазвичай потрібен блок на 19 В і 65 Вт із тонким штекером 3.0×1.1 мм. Рекомендую [Блок живлення PowerPlant ACER 220V, 65W, 19V, 3.42A (AC65F3011)](https://informatica.com.ua/products/blok-zhivlennya-do-noutbuku-powerplant-acer-220v-65w-19v-3-42a-3-0-1-1mm-ac65f3011): 729 грн. Якщо раптом не підійде — без проблем обміняємо або повернемо.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"5.5 1.7 блок живлення ноутбука Acer 19V 65W\",\"pagination\":{\"limit\":10}},\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua\"}}}"
+      },
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"Acer Aspire 5 A515-56 charger connector size watt\"}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "lenovo-loq-230w",
+    "conversationId": "eval-baseline-202611121226-lenovo-loq-230w",
+    "ms": 15605,
+    "chars": 641,
+    "answer": "Скоріше за все, не підійде як основний зарядний: роз'єм 11.0×4.5 мм (slim tip) збігається, але Lenovo LOQ 15AHP9 живиться від блоку 20 В на 230 Вт, а також є версії на 170 Вт, тоді як кабель дає лише 65 Вт. Найближчий у нас варіант: [Кабель USB Type-C 65W для зарядки ноутбука Lenovo](https://informatica.com.ua/products/usb-type-c-65w-kabel-pitaniya-dc-11-0-4-5-square-lenovo-dlya-zaryadki-noutbuka-ot-poverbanka-usb), 399 грн. Він працює від повербанка з видачею 20 В по USB-C, але заряджатиме повільніше під навантаженням.\n\nЯкщо раптом не підійде — без проблем обміняємо\n\n(Відповідь була обрізана. Попросіть продовжити або звузьте запит.)",
+    "tools": [
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"Lenovo LOQ 15AHP9 charger connector power watt\"}"
+      },
+      {
+        "name": "search_catalog",
+        "input": "{\"meta\":{\"ucp-agent\":{\"profile\":\"informatica\"}},\"catalog\":{\"query\":\"кабель для зарядки ноутбука Lenovo\"}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "message_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "lenovo-loq-arp10e-form",
+    "conversationId": "eval-baseline-202611121226-lenovo-loq-arp10e-form",
+    "ms": 13268,
+    "chars": 336,
+    "answer": "Скорее всего, подойдёт. По данным из интернета, штатный блок LOQ 15ARP10E — 135 Вт, 20 В, slim-штекер 11.0×4.5 мм. Разъём адаптера совпадает, а напряжение 18,5–20 В подходит. Адаптер на 100 Вт слабее штатных 135 Вт, поэтому при тяжёлых играх ноутбук может заряжаться медленнее.\n\nЕсли вдруг не подойдёт — без проблем обменяем или вернём.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"USB Type-C 100W DC 11.0 4.5\",\"filters\":{\"available\":true}},\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua/.well-known/ucp\"}}}"
+      },
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"Lenovo LOQ 15ARP10 charger connector size watt\"}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "surface-1769",
+    "conversationId": "eval-baseline-202611121226-surface-1769",
+    "ms": 12751,
+    "chars": 479,
+    "answer": "Нет, не подойдёт. За информацией из интернета, Surface Laptop 1769 заряжается через фирменный порт Surface Connect, а не через USB-C или DC-разъём, поэтому наш Type-C кабель для Surface Pro и Surface Book не подойдёт. Подойдёт [Сумісний зарядний пристрій Microsoft Surface PRO 3 44 5 6 7 8 Book Laptop Windows 15V 2,6A](https://informatica.com.ua/products/77302): 15V 2,6A, 40 Вт, совместим с Laptop и Laptop 2, 809 грн.\n\nЕсли вдруг не подойдёт — без проблем обменяем или вернём.",
+    "tools": [
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"Microsoft Surface Laptop model 1769 charger connector\"}"
+      },
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"Microsoft Surface зарядка кабель\"},\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua\"}}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "acer-f5-571g",
+    "conversationId": "eval-baseline-202611121226-acer-f5-571g",
+    "ms": 11200,
+    "chars": 505,
+    "answer": "Так, підійде. За інформацією з інтернету, Acer F5-571G живиться від 19 В через роз'єм 5.5×1.7 мм, а блоки для нього бувають на 45 і 65 Вт. [USB Type-C 65W кабель живлення DC 5.5×1.7 для зарядки ноутбука Acer](https://informatica.com.ua/products/usb-type-c-65w-kabel-pitaniya-dc-5-5-1-7-acer-zaryadki-noutbuka-ot-poverbanka-usb) за 399 грн покриває обидва варіанти. Він працює від повербанка, тож перевірте, що його USB-C порт видає 20 В (PD).\n\nЯкщо раптом не підійде — без проблем обміняємо або повернемо.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"кабель живлення ноутбука Acer 5.5 1.7\",\"filters\":{\"available\":true}}}"
+      },
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"Acer Aspire F5-571G charger connector size watt\"}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "vivobook-x1404va-intenso",
+    "conversationId": "eval-baseline-202611121226-vivobook-x1404va-intenso",
+    "ms": 16382,
+    "chars": 448,
+    "answer": "Скоріше за все, не підійде. За інформацією з інтернету, для цього ноутбука зазвичай потрібен штекер 4.5*3.0mm на 19 В, а USB-C кабеля з таким роз'ємом у нашому каталозі зараз немає. 20 В не страшно, якщо павербанк видає 20 В по USB-C PD саме на тому порту, куди йде кабель, бо кабель сам узгоджує напругу до 19 В. Не всі павербанки це вміють, тож перевірте це в характеристиках Intenso. Якщо раптом не підійде — без проблем обміняємо або повернемо.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":\"{\\\"query\\\": \\\"USB-C кабель Asus 4.0 1.35 19V\\\"}}\"}"
+      },
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"Asus Vivobook 14 X1404VA charger connector size watt\"}"
+      },
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":\"{\\\"query\\\": \\\"USB-C DC кабель Asus 4.5 3.0 20V\\\"}}\"}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "message_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "lenovo-v15-g2",
+    "conversationId": "eval-baseline-202611121226-lenovo-v15-g2",
+    "ms": 10859,
+    "chars": 476,
+    "answer": "Так, підійде. За інформацією з інтернету, 20V 2.25A 45Watt charger for Lenovo V15 G2 ALC, роз'єм 4.0×1.7 мм, тож [Кабель живлення USB Type-C 65W DC 4.0×1.7 для ноутбуків Lenovo](https://informatica.com.ua/products/usb-type-c-65w-kabel-pitaniya-dc-4-0-1-7-lenovo-dlya-zaryadki-noutbuka-ot-poverbanka-usb) за 399 грн його покриває. Повербанк має видавати 20 В по USB-C PD саме на тому порту, куди підключаєте кабель. Якщо раптом не підійде — без проблем обміняємо або повернемо.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"кабель живлення Lenovo ноутбук\"},\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua\"}}}"
+      },
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"Lenovo V15 G2 ALC charger connector size watt\"}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "asus-x302u-hoco65",
+    "conversationId": "eval-baseline-202611121226-asus-x302u-hoco65",
+    "ms": 12831,
+    "chars": 666,
+    "answer": "Так, підійде. Перехідник видає 18,5–20 В і до 100 Вт, тож для ASUS X302U (19 В, 2,37 А, 45 Вт) напруги та потужності вистачає з запасом. [Перехідник USB Type-C на DC 4.0x1.35mm + PD Triger 100W для зарядки ноутбуків Asus](https://informatica.com.ua/products/perekhodnik-usb-type-c-na-dc-4-0x1-35mm-pd-triger-19-5v-100w-dlya-asus-zaryadki-noutbuka-ot-poverbanka)\n\nДля Hoco DB03 Max 65W головне: повербанк має віддавати 20 В по USB-C PD саме на тому порту, куди ви підключаєте кабель. Не всі повербанки це вміють.\n\nГарантія вказана на сторінці кожного товару, а повернення протягом 14 днів з дня отримання. Якщо раптом не підійде — без проблем обміняємо або повернемо.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"USB-C PD 100W DC 4.0 1.35 19V перехідник\"}}"
+      },
+      {
+        "name": "search_shop_policies_and_faqs",
+        "input": "{\"query\":\"гарантія на товари\",\"policy_types\":[\"refund\"]}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "hoco-100w-trap",
+    "conversationId": "eval-baseline-202611121226-hoco-100w-trap",
+    "ms": 13158,
+    "chars": 342,
+    "answer": "Так, підійде. За даними Lenovo, блоки живлення для V15 G2 IJL бувають 45 Вт або 65 Вт, а роз'єм 4.0 мм / 1.7 мм, тож наш кабель 100 Вт (18,5–20 В) їх покриває. Павербанк Hoco J121 має видавати 20 В саме на тому USB-C порту, куди підключаєте кабель, бо не всі павербанки це вміють. Якщо раптом не підійде — без проблем обміняємо або повернемо.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"Type-C DC 4.0 1.7\"},\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua\"}}}"
+      },
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"Lenovo V15 G2 adapter connector size watt\"}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "asus-rog-strix18-ram",
+    "conversationId": "eval-baseline-202611121226-asus-rog-strix18-ram",
+    "ms": 8368,
+    "chars": 423,
+    "answer": "Так, підійде. Asus ROG Strix 18 використовує DDR5 SO-DIMM, у ноутбука два слоти, максимум 64 ГБ.\nДля ігор раджу комплект [Модуль пам'яті SoDIMM DDR5 32GB (2x16GB) 6000 MHz Kingston Fury (KF560S38IBK2-32)](https://informatica.com.ua/products/modul-pam-yat-dlya-noutbuka-sodimm-ddr5-32gb-2x16gb-6000-mhz-impact-kingston-fury-ex-hyperx-kf560s38ibk2-32): 39675 грн.\nЯкщо раптом не підійде — без проблем обміняємо або повернемо.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"DDR5 SO-DIMM оперативна пам'ять ноутбук\"},\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua\"}}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "vivobook15-ram-family",
+    "conversationId": "eval-baseline-202611121226-vivobook15-ram-family",
+    "ms": 14636,
+    "chars": 286,
+    "answer": "Так, підійде. За інформацією з інтернету, більшість Vivobook 15 take DDR4 SO-DIMM, а Kingston 16 ГБ DDR4-3200 1,2 В має той самий стандарт. Якщо в ноутбуці два слоти, одну планку 8 ГБ можна замінити цією, і вийде 24 ГБ\n\n(Відповідь була обрізана. Попросіть продовжити або звузьте запит.)",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"Kingston SO-DIMM DDR4 16GB 3200\"}}"
+      },
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"Asus Vivobook 15 memory SO-DIMM DDR4 slots max RAM\"}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "message_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "vivobook-x1504za-ram",
+    "conversationId": "eval-baseline-202611121226-vivobook-x1504za-ram",
+    "ms": 12135,
+    "chars": 321,
+    "answer": "Скоріше за все, підійде. За інформацією з інтернету, у цього ноутбука один слот SO-DIMM DDR4-3200, а пам'ять 260-pin на 1,2 В, тож вона відповідає. Щодо максимального обсягу джерела розходяться: одні пишуть про 16 ГБ, інші про 24 ГБ разом із розпаяними 8 ГБ.\n\nЯкщо раптом не підійде — без проблем обміняємо або повернемо.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"Kingston SO-DIMM DDR4 16GB 3200\"}}"
+      },
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"Asus Vivobook 15 X1504ZA memory slots maximum RAM DDR4\"}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "msi-thin15-b12",
+    "conversationId": "eval-baseline-202611121226-msi-thin15-b12",
+    "ms": 15089,
+    "chars": 553,
+    "answer": "Ні, не підійде.\n\nЗа інформацією з інтернету, MSI Thin 15 B12 живиться від адаптера 20 В, 120 Вт, з роз'ємом 4.5×3.0 мм. Наш кабель має той самий роз'єм і напругу, але його максимум 100 Вт, тож повної потужності він не дасть.\n\nЗамість нього візьміть [Блок живлення PowerPlant HP 220V, 120W (HP120G4530)](https://informatica.com.ua/products/blok-zhivlennya-do-noutbuku-powerplant-hp-220v-120w-19-5v-4-5-3-0-hp120g4530) за 1299 грн: роз'єм 4.5×3.0 мм, 120 Вт, 19.5 В (різниця з 20 В невелика).\n\nЯкщо раптом не підійде — без проблем обміняємо або повернемо.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"2738\",\"pagination\":{\"limit\":5}}}"
+      },
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"MSI Thin 15 B12 adapter connector size watt\"}"
+      },
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"блок живлення MSI 4.5 3.0 120W\"}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "message_complete",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "dell-latitude-7450",
+    "conversationId": "eval-baseline-202611121226-dell-latitude-7450",
+    "ms": 14016,
+    "chars": 474,
+    "answer": "No, this adapter won't work with the Dell Latitude 7450. Its power-adapter port is USB Type-C, so there's no 7.4×5.0 barrel jack for a DC plug to go into. A better option is the [Зарядний пристрій Vinga GaN 65W PD+QC 1C1A (VCPCHCA65B)](https://informatica.com.ua/products/zaryadniy-pristr-y-vinga-gan-65w-pd-qc-1c1a-ports-wall-charger-vcpchca65b) for 669 грн, which charges over USB-C with a standard USB-C cable. If it doesn't fit, no problem — we'll exchange or refund it.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"USB-C to DC 7.4 5.0 adapter HP\"}}"
+      },
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"Dell Latitude 7450 charging port USB-C power input\"}"
+      },
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"USB-C PD 65W charger laptop\"}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "message_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "x705uf-vs-2516",
+    "conversationId": "eval-baseline-202611121226-x705uf-vs-2516",
+    "ms": 12992,
+    "chars": 479,
+    "answer": "Ні, не підійде. Оригінальний блок живлення цього ноутбука має роз'єм із зовнішнім діаметром 5.5 мм і внутрішнім 2.5 мм, а наш кабель має 4.5×3.0 мм, тому не зайде в гніздо. Підійде [USB Type-C 65W кабель живлення DC 5.5×2.5 для зарядки ноутбуків Asus, Lenovo, Toshiba](https://informatica.com.ua/products/usb-type-c-65w-kabel-pitaniya-dc-5-5-2-5-asus-lenovo-toshiba-dlya-zaryadki-noutbuka-ot-poverbanka-usb): 399 грн. Якщо раптом не підійде — без проблем обміняємо або повернемо.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"2516\",\"pagination\":{\"limit\":5}},\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua/.well-known/ucp\"}}}"
+      },
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"ASUS Vivobook 17 X705UF charger connector size watt\"}"
+      },
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"USB Type-C кабель DC 5.5 2.5 65W Asus\"}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "message_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "art1534-reverse",
+    "conversationId": "eval-baseline-202611121226-art1534-reverse",
+    "ms": 7274,
+    "chars": 459,
+    "answer": "Так, підійде. Ноутбуку потрібно 20 В на роз'ємі 4.0×1.7 мм, а [Адаптер DC 4.0×1.7 на Type-C 100W E-marke](https://informatica.com.ua/products/adapter-s-dc-4-0-1-7-na-type-c-100w-e-marke-perekhodnik-preobrazovatel-pitaniya-dlya-zaryadki-noutbuka-ot-poverb) видає 20 В по PD. Головне: павербанк має видавати 20 В PD саме на тому USB-C порту, куди підключаєте кабель, бо не всі повербанки це вміють.\n\nЯкщо раптом не підійде — без проблем обміняємо або повернемо.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"1534\",\"pagination\":{\"limit\":5}},\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua\"}}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "baseus-have-cable",
+    "conversationId": "eval-baseline-202611121226-baseus-have-cable",
+    "ms": 9843,
+    "chars": 282,
+    "answer": "Наразі в каталозі немає кабелю чи перехідника Type-C → DC 4.0×1.7, тож готового варіанта з нашого асортименту запропонувати не можу. Ваш Baseus — звичайний USB-C кабель, тому на DC-штекер він не переходить. Уточнити, чи можна замовити такий під запит, можна в Telegram t.me/NSergiy.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":\"{\\\"query\\\": \\\"кабель DC 4.0 1.7 USB-C\\\"}}\"}"
+      },
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":\"{\\\"query\\\": \\\"перехідник 4.0 1.7 USB-C\\\"}}\"}"
+      },
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":\"{\\\"query\\\": \\\"Type-C to DC ноутбук кабель живлення\\\"}}\"}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "message_complete",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "acer-a317-52",
+    "conversationId": "eval-baseline-202611121226-acer-a317-52",
+    "ms": 10083,
+    "chars": 502,
+    "answer": "Так, підійде. За даними з інтернету, Acer Aspire 3 A317-52 живиться від 19 В через роз'єм 5.5×1.7 мм, а його блоки мають 45–65 Вт, тож кабель [USB Type-C 65W кабель живлення DC 5.5×1.7 для зарядки ноутбука Acer](https://informatica.com.ua/products/usb-type-c-65w-kabel-pitaniya-dc-5-5-1-7-acer-zaryadki-noutbuka-ot-poverbanka-usb) (399 грн) з ним сумісний. Повербанк має видавати 20 В саме на USB-C порт, інакше ноутбук не заряджатиметься.\n\nЯкщо раптом не підійде — без проблем обміняємо або повернемо.",
+    "tools": [
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"Acer Aspire 3 A317-52 charger connector size watt\"}"
+      },
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"кабель живлення ноутбука 5.5 1.7\",\"pagination\":{\"limit\":10}},\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua\"}}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "dell-inspiron-3530",
+    "conversationId": "eval-baseline-202611121226-dell-inspiron-3530",
+    "ms": 14928,
+    "chars": 547,
+    "answer": "Dell Inspiron 15 3530: разъём 4.5×3.0 мм, 19.5 В, 65 Вт по данным из интернета. [USB Type-C 65W кабель живлення DC 4.5×3.0*0.6 для зарядки ноутбука Dell](https://informatica.com.ua/products/usb-type-c-65w-kabel-pitaniya-dc-4-5-3-0-0-6-dell-dlya-zaryadki-noutbuka-ot-poverbanka-usb) с таким же разъёмом и 65 Вт это покрывает.\n\nСкорее всего, подойдёт. Кабель работает от повербанка, поэтому он должен выдавать 20 В по USB-C PD на порту, куда подключаете кабель. Не все повербанки это умеют.\n\nЕсли вдруг не подойдёт — без проблем обменяем или вернём.",
+    "tools": [
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"Dell Inspiron 15 3530 adapter connector size watt\"}"
+      },
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"кабель живлення Dell 7.4 5.0 19.5 В\"},\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua\"}}}"
+      },
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"кабель живлення Dell 4.5 3.0 USB Type-C\"},\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua\"}}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "message_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "hp-family-ask-model",
+    "conversationId": "eval-baseline-202611121226-hp-family-ask-model",
+    "ms": 13501,
+    "chars": 582,
+    "answer": "Скоріше за все, підійде. За інформацією з інтернету, HP 250 живиться від роз'єму 4.5×3.0 мм, 19.5 В, Wattage: 65W or 45W (depending on model). Наші HP-кабелі мають роз'єм 4.5×3.0 мм і видають 18.5–20 В, тож вони це покривають. Для моделі на 65 Вт підійде [USB Type-C 65W кабель живлення для зарядки ноутбука](https://informatica.com.ua/products/usb-type-c-65w-kabel-pitaniya-dc-4-5-3-0-0-6-hp-dlya-zaryadki-noutbuka-ot-poverbanka-usb). Важливо, щоб повербанк видавав 20 В по USB-C PD, інакше ноутбук не заряджатиметься.\n\nЯкщо раптом не підійде — без проблем обміняємо або повернемо.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"кабель живлення HP 4.5 3.0\"},\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua\"}}}"
+      },
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"HP 250 G series laptop charger connector size voltage watt\"}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "return-policy",
+    "conversationId": "eval-baseline-202611121226-return-policy",
+    "ms": 5212,
+    "chars": 414,
+    "answer": "Так, можна. Повернення або обмін протягом 14 днів з дня отримання. Гроші повертаємо на картку або готівкою (у Києві) зазвичай за 2–3 робочі дні після того, як отримаємо товар. Зв'язатися можна за номером (099) 381-5288 або на info@informatica.com.ua. Доставку при поверненні оплачує покупець, якщо товар не несправний. Безкоштовну зворотну доставку можна оформити через «Легке повернення» в застосунку Нової Пошти.",
+    "tools": [
+      {
+        "name": "search_shop_policies_and_faqs",
+        "input": "{\"query\":\"повернення та обмін товару\",\"policy_types\":[\"refund\"]}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn"
+    ]
+  },
+  {
+    "id": "ram-new-or-used",
+    "conversationId": "eval-baseline-202611121226-ram-new-or-used",
+    "ms": 11486,
+    "chars": 299,
+    "answer": "Стан (нова чи б/у) у картці товару не вказано, тож точно підтвердити не можу. Строк гарантії вказано на сторінці самого товару: [SO-DIMM DDR4 8GB 3200MHz Samsung M471A1K43DB1-CWE](https://informatica.com.ua/products/m471a1k43db1-cwe), 2711 грн. Якщо з'явиться несправність, пишіть на (099) 381-5288.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"M471A1K43DB1-CWE SO-DIMM DDR4 8GB 3200MHz Samsung\"}}"
+      },
+      {
+        "name": "search_shop_policies_and_faqs",
+        "input": "{\"query\":\"гарантія на пам'ять нова або б/у стан товару\",\"policy_types\":[\"refund\"]}"
+      },
+      {
+        "name": "search_shop_policies_and_faqs",
+        "input": "{\"query\":\"Чи є товари б/у, гарантія на товар\"}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "delivery",
+    "conversationId": "eval-baseline-202611121226-delivery",
+    "ms": 5945,
+    "chars": 310,
+    "answer": "Вартість залежить від тарифів Нової Пошти, тож точну суму для Львова ви побачите під час оформлення замовлення. Відправляємо за 1–2 робочі дні, а доставка зазвичай займає 1–3 дні. Є відділення, поштомат і кур'єр до дверей, а оплатити можна на картку або при отриманні (за переказ тоді бере комісію Нова Пошта).",
+    "tools": [
+      {
+        "name": "search_shop_policies_and_faqs",
+        "input": "{\"query\":\"Скільки коштує доставка до Львова Новою Поштою\",\"policy_types\":[\"shipping\"]}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn"
+    ]
+  },
+  {
+    "id": "order-status",
+    "conversationId": "eval-baseline-202611121226-order-status",
+    "ms": 4021,
+    "chars": 345,
+    "answer": "Замовлення 1234 оформлено позавчора, тож за нормальних умов відправка має бути сьогодні або найближчим часом: ми відправляємо за 1–2 робочі дні. Статус у чаті я перевірити не можу. Напишіть менеджеру з номером замовлення 1234 у Telegram t.me/NSergiy або за телефоном (099) 381-5288. Менеджер працює пн–пт з 10:00 до 18:00 і перевірить відправку.",
+    "tools": [],
+    "events": [
+      "id",
+      "content_block_complete",
+      "message_complete",
+      "end_turn"
+    ]
+  },
+  {
+    "id": "en-xiaomi",
+    "conversationId": "eval-baseline-202611121226-en-xiaomi",
+    "ms": 13444,
+    "chars": 580,
+    "answer": "Most likely yes, it fits. This 65W laptop adapter charger is engineered specifically for Xiaomi RedmiBook 15 XMA2101-BW, delivering a stable 19.5V/3.33A output through a precision 4.0mm x 1.7mm connector. Our [Кабель живлення USB Type-C 65W DC 4.0×1.7 для ноутбуків Lenovo](https://informatica.com.ua/products/usb-type-c-65w-kabel-pitaniya-dc-4-0-1-7-lenovo-dlya-zaryadki-noutbuka-ot-poverbanka-usb) (399 грн) has the same 4.0×1.7 mm plug and 65 W output, but your power bank must put out 20 V on the port you plug into. If it doesn't fit, no problem, we'll exchange or refund it.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"laptop charging cable Xiaomi Redmi Book\"},\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua\"}}}"
+      },
+      {
+        "name": "web_search",
+        "input": "{\"query\":\"Xiaomi Redmi Book 15 charger connector size watt\"}"
+      },
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"4.0 1.7 USB Type-C кабель живлення ноутбук\"},\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua\"}}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "message_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  }
+]
