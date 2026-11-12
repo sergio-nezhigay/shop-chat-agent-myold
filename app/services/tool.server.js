@@ -258,7 +258,10 @@ export function createToolService() {
 
     const lines = allFormattedProducts.map((p) => {
       const name = buildProductLinkSnippet(p) || p.title;
-      const warranty = p.warranty_months ? `, гарантія ${p.warranty_months} міс.` : '';
+      // 99 in custom.warranty is the owner's code for a lifetime warranty.
+      const warranty = !p.warranty_months ? ''
+        : p.warranty_months === 99 ? ', гарантія довічна'
+        : `, гарантія ${p.warranty_months} міс.`;
       return `- ${name}: ${p.price}${warranty} (id: ${p.id})`;
     });
 
