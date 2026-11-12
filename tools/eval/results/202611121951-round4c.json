@@ -1,0 +1,68 @@
+[
+  {
+    "id": "lenovo-v15-g2",
+    "conversationId": "eval-round4c-202611121951-lenovo-v15-g2",
+    "ms": 6824,
+    "chars": 297,
+    "answer": "Для Lenovo V15 G2 ALC підійде [Кабель живлення USB Type-C 65W DC 4.0×1.7 для ноутбуків Lenovo](https://informatica.com.ua/products/usb-type-c-65w-kabel-pitaniya-dc-4-0-1-7-lenovo-dlya-zaryadki-noutbuka-ot-poverbanka-usb) — 399 грн. Перевірте, що штекер 4.0×1.7 мм, а павербанк чи зарядка дає 20 В.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"meta\":{\"ucp-agent\":{\"profile\":\"https://informatica.com.ua\"}},\"catalog\":{\"query\":\"Type-C DC 4.0 1.7\"}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "art1534-reverse",
+    "conversationId": "eval-round4c-202611121951-art1534-reverse",
+    "ms": 8493,
+    "chars": 424,
+    "answer": "На жаль, не підійде: арт. 1534 працює навпаки, тож для заряджання ноутбука він не годиться. Раджу [Кабель живлення USB Type-C 65W DC 4.0×1.7 для ноутбуків Lenovo](https://informatica.com.ua/products/usb-type-c-65w-kabel-pitaniya-dc-4-0-1-7-lenovo-dlya-zaryadki-noutbuka-ot-poverbanka-usb) за 399 грн: оригінальний блок IdeaPad 320-17IKB на 45–65 Вт, тож 65 Вт вистачає. Перевірте, що штекер 4.0×1.7 мм, а павербанк дає 20 В.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"Type-C DC 4.0 1.7\"}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  },
+  {
+    "id": "baseus-have-cable",
+    "conversationId": "eval-round4c-202611121951-baseus-have-cable",
+    "ms": 7565,
+    "chars": 383,
+    "answer": "Раджу [Адаптер DC 4.0×1.7 на Type-C 100W E-marke](https://informatica.com.ua/products/adapter-s-dc-4-0-1-7-na-type-c-100w-e-marke-perekhodnik-preobrazovatel-pitaniya-dlya-zaryadki-noutbuka-ot-poverb) за 389 грн. Це насадка, яка підключається до вашого кабелю Type-C на 100 Вт, тож окремий кабель купувати не потрібно. Перевірте, що штекер 4.0×1.7 мм, а павербанк чи зарядка дає 20 В.",
+    "tools": [
+      {
+        "name": "search_catalog",
+        "input": "{\"catalog\":{\"query\":\"Перехідник USB Type-C на DC 4.0 1.7\"}}"
+      }
+    ],
+    "events": [
+      "id",
+      "message_complete",
+      "tool_use",
+      "content_block_complete",
+      "message_complete",
+      "end_turn",
+      "product_results"
+    ]
+  }
+]
